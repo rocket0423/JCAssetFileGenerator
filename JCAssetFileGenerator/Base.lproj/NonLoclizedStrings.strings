@@ -1,0 +1,16 @@
+/* 
+  NonLoclizedStrings.strings
+
+  Created by Justin Carstens on 7/22/16.
+  Copyright © 2016 Square, Inc. All rights reserved.
+*/
+
+
+// Test
+"login error_message2" = "There was an error in attmpting to login. Please try again later."; // Login Screen Error Message
+
+/* File List Group Title */
+"global_unauthorized2" = "Unauthorized\nPlease Login again."; // Needs Translation
+
+/* No comment provided by engineer. */
+"global_test2" = "test";
