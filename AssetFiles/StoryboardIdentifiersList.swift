@@ -64,7 +64,7 @@ class StoryboardIdentifiersList: ListGeneratorHelper {
         if methodName == nil {
             finalMethodName = ListGeneratorHelper.capitalizedString(ListGeneratorHelper.methodName(value))
         } else {
-            finalMethodName = methodName!
+            finalMethodName = ListGeneratorHelper.capitalizedString(ListGeneratorHelper.methodName(methodName!))
         }
         if !verify && keys.contains(finalMethodName) {
             // We are not verifying and this key already exists.
