@@ -342,7 +342,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "DERIVED_SOURCES=\"$SRCROOT/JCAssetFileGenerator/Generated\"\nEXECUTABLES=\"$SRCROOT/Executables\"\n\nIDENTIFIERS_PATH=\"$DERIVED_SOURCES/Identifiers\"\nCATALOGS_PATH=\"$DERIVED_SOURCES/Images\"\nFONTS_PATH=\"$DERIVED_SOURCES/Fonts\"\nCOLORS_PATH=\"$DERIVED_SOURCES/Colors\"\nSTRINGS_PATH=\"$DERIVED_SOURCES/Strings\"\n\nrm -rf \"$IDENTIFIERS_PATH\"\nrm -rf \"$CATALOGS_PATH\"\nrm -rf \"$FONTS_PATH\"\nrm -rf \"$COLORS_PATH\"\nrm -rf \"$STRINGS_PATH\"\nmkdir -p \"$IDENTIFIERS_PATH\"\nmkdir -p \"$CATALOGS_PATH\"\nmkdir -p \"$FONTS_PATH\"\nmkdir -p \"$COLORS_PATH\"\nmkdir -p \"$STRINGS_PATH\"\n\n\n# Simple Color File From All Sources\n\"$EXECUTABLES/AssetFiles\" -colors -o \"$COLORS_PATH\"\n# Simple Color File From All Sources in objective c\n\"$EXECUTABLES/AssetFiles\" -colors -o \"$COLORS_PATH\" -objc\n# Multiple Color Files With Prefix\n\"$EXECUTABLES/AssetFiles\" -colors -o \"$COLORS_PATH\" -p BP -m\n# Simple Identifiers File From All Sources\n\"$EXECUTABLES/AssetFiles\" -identifiers -o \"$IDENTIFIERS_PATH\"\n# Simple Identifiers File From All Sources in objective c\n\"$EXECUTABLES/AssetFiles\" -identifiers -o \"$IDENTIFIERS_PATH\" -objc\n# Multiple Identifier Files With Prefix\n\"$EXECUTABLES/AssetFiles\" -identifiers -o \"$IDENTIFIERS_PATH\" -p BP -m\n# Simple Fonts File From all Font Files\n\"$EXECUTABLES/AssetFiles\" -fonts -o \"$FONTS_PATH\"\n# Simple Fonts File From all Font Files in objective c\n\"$EXECUTABLES/AssetFiles\" -fonts -o \"$FONTS_PATH\" -objc\n# Simple Images File From All Sources\n\"$EXECUTABLES/AssetFiles\" -images -o \"$CATALOGS_PATH\"\n# Simple Images File From All Sources in objective c\n\"$EXECUTABLES/AssetFiles\" -images -o \"$CATALOGS_PATH\" -objc\n# Multiple Images Files With Prefix\n\"$EXECUTABLES/AssetFiles\" -images -o \"$CATALOGS_PATH\" -p BP -m -dnverify\n# Simple Strings File From All Sources\n\"$EXECUTABLES/AssetFiles\" -strings -o \"$STRINGS_PATH\" -dnhelp\n# Simple Strings File From All Sources in objective c\n\"$EXECUTABLES/AssetFiles\" -strings -o \"$STRINGS_PATH\" -objc -dnhelp\n# Multiple Strings Files With Prefix\n\"$EXECUTABLES/AssetFiles\" -strings -o \"$STRINGS_PATH\" -p BP -m -dnhelp";
+			shellScript = "DERIVED_SOURCES=\"$SRCROOT/JCAssetFileGenerator/Generated\"\nEXECUTABLES=\"$SRCROOT/Executables\"\n\nIDENTIFIERS_PATH=\"$DERIVED_SOURCES/Identifiers\"\nCATALOGS_PATH=\"$DERIVED_SOURCES/Images\"\nFONTS_PATH=\"$DERIVED_SOURCES/Fonts\"\nCOLORS_PATH=\"$DERIVED_SOURCES/Colors\"\nSTRINGS_PATH=\"$DERIVED_SOURCES/Strings\"\n\nrm -rf \"$IDENTIFIERS_PATH\"\nrm -rf \"$CATALOGS_PATH\"\nrm -rf \"$FONTS_PATH\"\nrm -rf \"$COLORS_PATH\"\nrm -rf \"$STRINGS_PATH\"\nmkdir -p \"$IDENTIFIERS_PATH\"\nmkdir -p \"$CATALOGS_PATH\"\nmkdir -p \"$FONTS_PATH\"\nmkdir -p \"$COLORS_PATH\"\nmkdir -p \"$STRINGS_PATH\"\n\n\n# Simple Color File From All Sources\n\"$EXECUTABLES/AssetFiles\" -colors -o \"$COLORS_PATH\"\n# Simple Color File From All Sources in objective c\n\"$EXECUTABLES/AssetFiles\" -colors -o \"$COLORS_PATH\" -objc\n# Multiple Color Files With Prefix\n\"$EXECUTABLES/AssetFiles\" -colors -o \"$COLORS_PATH\" -p BP -m\n# Simple Identifiers File From All Sources\n\"$EXECUTABLES/AssetFiles\" -identifiers -o \"$IDENTIFIERS_PATH\"\n# Simple Identifiers File From All Sources in objective c\n\"$EXECUTABLES/AssetFiles\" -identifiers -o \"$IDENTIFIERS_PATH\" -objc\n# Multiple Identifier Files With Prefix\n\"$EXECUTABLES/AssetFiles\" -identifiers -o \"$IDENTIFIERS_PATH\" -p BP -m\n# Simple Fonts File From all Font Files\n\"$EXECUTABLES/AssetFiles\" -fonts -o \"$FONTS_PATH\"\n# Simple Fonts File From all Font Files in objective c\n\"$EXECUTABLES/AssetFiles\" -fonts -o \"$FONTS_PATH\" -objc\n# Simple Images File From All Sources\n\"$EXECUTABLES/AssetFiles\" -images -o \"$CATALOGS_PATH\"\n# Simple Images File From All Sources in objective c\n\"$EXECUTABLES/AssetFiles\" -images -o \"$CATALOGS_PATH\" -objc\n# Multiple Images Files With Prefix\n\"$EXECUTABLES/AssetFiles\" -images -o \"$CATALOGS_PATH\" -p BP -m -dnverify\n# Simple Strings File From All Sources\n\"$EXECUTABLES/AssetFiles\" -strings -o \"$STRINGS_PATH\" -dnhelp\n# Simple Strings File From All Sources in objective c\n\"$EXECUTABLES/AssetFiles\" -strings -o \"$STRINGS_PATH\" -objc -dnhelp\n# Multiple Strings Files With Prefix\n\"$EXECUTABLES/AssetFiles\" -strings -o \"$STRINGS_PATH\" -p BP -m -dnhelp\n";
 		};
 		B934B39C20FA61A20060BB43 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -549,14 +549,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = MB4687D7PR;
 				INFOPLIST_FILE = JCAssetFileGenerator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = jcgroup.JCAssetFileGenerator;
+				PRODUCT_BUNDLE_IDENTIFIER = doubledutch.JCAssetFileGenerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Wildcard In House Distribution 2019";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -566,14 +569,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = JCAssetFileGenerator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = jcgroup.JCAssetFileGenerator;
+				PRODUCT_BUNDLE_IDENTIFIER = doubledutch.JCAssetFileGenerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
