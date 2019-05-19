@@ -32,8 +32,6 @@
 		B934B3C820FA64A70060BB43 /* BPMainStoryboardIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934B3B020FA64A70060BB43 /* BPMainStoryboardIdentifiers.swift */; };
 		B934B3C920FA64A70060BB43 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934B3B320FA64A70060BB43 /* Fonts.swift */; };
 		B934B3CA20FA64A70060BB43 /* Fonts.m in Sources */ = {isa = PBXBuildFile; fileRef = B934B3B420FA64A70060BB43 /* Fonts.m */; };
-		B934B3CB20FA64A70060BB43 /* BPImagesImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934B3B620FA64A70060BB43 /* BPImagesImages.swift */; };
-		B934B3CC20FA64A70060BB43 /* Images.m in Sources */ = {isa = PBXBuildFile; fileRef = B934B3B720FA64A70060BB43 /* Images.m */; };
 		B934B3CD20FA64A70060BB43 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934B3B920FA64A70060BB43 /* Images.swift */; };
 		B934B3CE20FA64A70060BB43 /* BPColorsAssetsColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934B3BB20FA64A70060BB43 /* BPColorsAssetsColors.swift */; };
 		B934B3CF20FA64A70060BB43 /* BPColorsStringsColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934B3BC20FA64A70060BB43 /* BPColorsStringsColors.swift */; };
@@ -86,9 +84,6 @@
 		B934B3B220FA64A70060BB43 /* Fonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fonts.h; sourceTree = "<group>"; };
 		B934B3B320FA64A70060BB43 /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		B934B3B420FA64A70060BB43 /* Fonts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fonts.m; sourceTree = "<group>"; };
-		B934B3B620FA64A70060BB43 /* BPImagesImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BPImagesImages.swift; sourceTree = "<group>"; };
-		B934B3B720FA64A70060BB43 /* Images.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Images.m; sourceTree = "<group>"; };
-		B934B3B820FA64A70060BB43 /* Images.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Images.h; sourceTree = "<group>"; };
 		B934B3B920FA64A70060BB43 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		B934B3BB20FA64A70060BB43 /* BPColorsAssetsColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BPColorsAssetsColors.swift; sourceTree = "<group>"; };
 		B934B3BC20FA64A70060BB43 /* BPColorsStringsColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BPColorsStringsColors.swift; sourceTree = "<group>"; };
@@ -216,9 +211,6 @@
 		B934B3B520FA64A70060BB43 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				B934B3B620FA64A70060BB43 /* BPImagesImages.swift */,
-				B934B3B720FA64A70060BB43 /* Images.m */,
-				B934B3B820FA64A70060BB43 /* Images.h */,
 				B934B3B920FA64A70060BB43 /* Images.swift */,
 			);
 			path = Images;
@@ -342,7 +334,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "DERIVED_SOURCES=\"$SRCROOT/JCAssetFileGenerator/Generated\"\nEXECUTABLES=\"$SRCROOT/Executables\"\n\nIDENTIFIERS_PATH=\"$DERIVED_SOURCES/Identifiers\"\nCATALOGS_PATH=\"$DERIVED_SOURCES/Images\"\nFONTS_PATH=\"$DERIVED_SOURCES/Fonts\"\nCOLORS_PATH=\"$DERIVED_SOURCES/Colors\"\nSTRINGS_PATH=\"$DERIVED_SOURCES/Strings\"\n\nrm -rf \"$IDENTIFIERS_PATH\"\nrm -rf \"$CATALOGS_PATH\"\nrm -rf \"$FONTS_PATH\"\nrm -rf \"$COLORS_PATH\"\nrm -rf \"$STRINGS_PATH\"\nmkdir -p \"$IDENTIFIERS_PATH\"\nmkdir -p \"$CATALOGS_PATH\"\nmkdir -p \"$FONTS_PATH\"\nmkdir -p \"$COLORS_PATH\"\nmkdir -p \"$STRINGS_PATH\"\n\n\n# Simple Color File From All Sources\n\"$EXECUTABLES/AssetFiles\" -colors -o \"$COLORS_PATH\"\n# Simple Color File From All Sources in objective c\n\"$EXECUTABLES/AssetFiles\" -colors -o \"$COLORS_PATH\" -objc\n# Multiple Color Files With Prefix\n\"$EXECUTABLES/AssetFiles\" -colors -o \"$COLORS_PATH\" -p BP -m\n# Simple Identifiers File From All Sources\n\"$EXECUTABLES/AssetFiles\" -identifiers -o \"$IDENTIFIERS_PATH\"\n# Simple Identifiers File From All Sources in objective c\n\"$EXECUTABLES/AssetFiles\" -identifiers -o \"$IDENTIFIERS_PATH\" -objc\n# Multiple Identifier Files With Prefix\n\"$EXECUTABLES/AssetFiles\" -identifiers -o \"$IDENTIFIERS_PATH\" -p BP -m\n# Simple Fonts File From all Font Files\n\"$EXECUTABLES/AssetFiles\" -fonts -o \"$FONTS_PATH\"\n# Simple Fonts File From all Font Files in objective c\n\"$EXECUTABLES/AssetFiles\" -fonts -o \"$FONTS_PATH\" -objc\n# Simple Images File From All Sources\n\"$EXECUTABLES/AssetFiles\" -images -o \"$CATALOGS_PATH\"\n# Simple Images File From All Sources in objective c\n\"$EXECUTABLES/AssetFiles\" -images -o \"$CATALOGS_PATH\" -objc\n# Multiple Images Files With Prefix\n\"$EXECUTABLES/AssetFiles\" -images -o \"$CATALOGS_PATH\" -p BP -m -dnverify\n# Simple Strings File From All Sources\n\"$EXECUTABLES/AssetFiles\" -strings -o \"$STRINGS_PATH\" -dnhelp\n# Simple Strings File From All Sources in objective c\n\"$EXECUTABLES/AssetFiles\" -strings -o \"$STRINGS_PATH\" -objc -dnhelp\n# Multiple Strings Files With Prefix\n\"$EXECUTABLES/AssetFiles\" -strings -o \"$STRINGS_PATH\" -p BP -m -dnhelp\n";
+			shellScript = "DERIVED_SOURCES=\"$SRCROOT/JCAssetFileGenerator/Generated\"\nEXECUTABLES=\"$SRCROOT/Executables\"\n\nIDENTIFIERS_PATH=\"$DERIVED_SOURCES/Identifiers\"\nCATALOGS_PATH=\"$DERIVED_SOURCES/Images\"\nFONTS_PATH=\"$DERIVED_SOURCES/Fonts\"\nCOLORS_PATH=\"$DERIVED_SOURCES/Colors\"\nSTRINGS_PATH=\"$DERIVED_SOURCES/Strings\"\n\nrm -rf \"$IDENTIFIERS_PATH\"\nrm -rf \"$CATALOGS_PATH\"\nrm -rf \"$FONTS_PATH\"\nrm -rf \"$COLORS_PATH\"\nrm -rf \"$STRINGS_PATH\"\nmkdir -p \"$IDENTIFIERS_PATH\"\nmkdir -p \"$CATALOGS_PATH\"\nmkdir -p \"$FONTS_PATH\"\nmkdir -p \"$COLORS_PATH\"\nmkdir -p \"$STRINGS_PATH\"\n\n\n# Simple Color File From All Sources\n\"$EXECUTABLES/AssetFiles\" -colors -o \"$COLORS_PATH\"\n# Simple Color File From All Sources in objective c\n\"$EXECUTABLES/AssetFiles\" -colors -o \"$COLORS_PATH\" -objc\n# Multiple Color Files With Prefix\n\"$EXECUTABLES/AssetFiles\" -colors -o \"$COLORS_PATH\" -p BP -m\n# Simple Identifiers File From All Sources\n\"$EXECUTABLES/AssetFiles\" -identifiers -o \"$IDENTIFIERS_PATH\"\n# Simple Identifiers File From All Sources in objective c\n\"$EXECUTABLES/AssetFiles\" -identifiers -o \"$IDENTIFIERS_PATH\" -objc\n# Multiple Identifier Files With Prefix\n\"$EXECUTABLES/AssetFiles\" -identifiers -o \"$IDENTIFIERS_PATH\" -p BP -m\n# Simple Fonts File From all Font Files\n\"$EXECUTABLES/AssetFiles\" -fonts -o \"$FONTS_PATH\"\n# Simple Fonts File From all Font Files in objective c\n\"$EXECUTABLES/AssetFiles\" -fonts -o \"$FONTS_PATH\" -objc\n# Simple Images File From All Sources\n\"$EXECUTABLES/AssetFiles\" -images -o \"$CATALOGS_PATH\"\n# Simple Images File From All Sources in objective c\n\"$EXECUTABLES/AssetFiles\" -images -o \"$CATALOGS_PATH\" -objc\n# Multiple Images Files With Prefix\n\"$EXECUTABLES/AssetFiles\" -images -o \"$CATALOGS_PATH\" -p BP -m -dnverify\n# Simple Strings File From All Sources\n\"$EXECUTABLES/AssetFiles\" -strings -o \"$STRINGS_PATH\" -dnhelp\n# Simple Strings File From All Sources in objective c\n\"$EXECUTABLES/AssetFiles\" -strings -o \"$STRINGS_PATH\" -objc -dnhelp\n# Multiple Strings Files With Prefix\n\"$EXECUTABLES/AssetFiles\" -strings -o \"$STRINGS_PATH\" -p BP -m -dnhelp -dnverify\n";
 		};
 		B934B39C20FA61A20060BB43 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -370,14 +362,12 @@
 				B934B3C120FA64A70060BB43 /* Strings.m in Sources */,
 				B934B3C920FA64A70060BB43 /* Fonts.swift in Sources */,
 				B934B3D120FA64A70060BB43 /* Colors.m in Sources */,
-				B934B3CB20FA64A70060BB43 /* BPImagesImages.swift in Sources */,
 				B934B3CA20FA64A70060BB43 /* Fonts.m in Sources */,
 				B934B2F320FA584C0060BB43 /* AppDelegate.swift in Sources */,
 				B934B3C820FA64A70060BB43 /* BPMainStoryboardIdentifiers.swift in Sources */,
 				B934B3CF20FA64A70060BB43 /* BPColorsStringsColors.swift in Sources */,
 				B934B3C520FA64A70060BB43 /* Identifiers.m in Sources */,
 				B934B3D020FA64A70060BB43 /* Colors.swift in Sources */,
-				B934B3CC20FA64A70060BB43 /* Images.m in Sources */,
 				B934B3CD20FA64A70060BB43 /* Images.swift in Sources */,
 				B934B3C720FA64A70060BB43 /* Identifiers.swift in Sources */,
 				B934B3CE20FA64A70060BB43 /* BPColorsAssetsColors.swift in Sources */,

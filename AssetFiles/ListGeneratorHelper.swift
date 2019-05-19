@@ -171,8 +171,10 @@ class ListGeneratorHelper: NSObject {
 
       // Start generating the necessary files.
       var fileGenerator = newHelper()
+      var fileStartDate: Date?
       for nextFile in filePaths {
         if !singleFile {
+          fileStartDate = Date()
           fileGenerator = newHelper()
         }
         // Setup the Generatior Information
@@ -196,14 +198,16 @@ class ListGeneratorHelper: NSObject {
         fileGenerator.startGeneratingInfo()
         if !singleFile {
           // Each File needs their own so write the output.
-          fileGenerator.fileWriter.writeOutputFile()
+          if fileGenerator.fileWriter.writeOutputFile() {
+            print("Finished \(className()) - \((nextFile as NSString).lastPathComponent) - in \(Date().timeIntervalSince(fileStartDate!)) seconds")
+          }
         }
       }
 
       if singleFile {
         fileGenerator.finishedGeneratingInfo()
         // We are all finished with all the files so now we can write the output.
-        fileGenerator.fileWriter.writeOutputFile()
+        _ = fileGenerator.fileWriter.writeOutputFile()
       }
 
       print("Finished \(className()) in \(Date().timeIntervalSince(startTime)) seconds")

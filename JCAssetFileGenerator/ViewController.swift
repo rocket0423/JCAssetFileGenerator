@@ -17,6 +17,11 @@ class ViewController: UIViewController {
         _ = Images.ireland
 //        _ = Strings.login_signin
 //        _ = Strings.login_no_password_message
+
+      // [UIImage imageNamed:@"Austria"]
+      // [UIImage imageNamed:@"Testing"]
+      _ = UIImage(named: "Israel")
+      _ = UIImage(named: "Apple")
     }
 
 }

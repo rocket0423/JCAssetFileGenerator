@@ -93,8 +93,10 @@ class ImagesList: ListGeneratorHelper {
 
     // Get the root path to the project so we can search
     var rootPath = searchPath
-    if let newRootPath = ListGeneratorHelper.runStringAsCommand("echo \"$SRCROOT\"") {
-      rootPath = newRootPath
+    if rootPath == nil {
+      if let newRootPath = ListGeneratorHelper.runStringAsCommand("echo \"$SRCROOT\"") {
+        rootPath = newRootPath
+      }
     }
     if rootPath == nil {
       return
@@ -111,6 +113,8 @@ class ImagesList: ListGeneratorHelper {
     commandPatterns.append(" -e \"image=\\\"*\\\"\"")
     commandPatterns.append(" -e \"Images\\.*\"")
     commandPatterns.append(" -e \"Images *\"")
+    commandPatterns.append(" -e \"UIImage(named: \\\"*\"")
+    commandPatterns.append(" -e \"UIImage imageNamed:@\\\"*\"")
 
     // Command to get results
     let command = "grep -i -r\(includeExtensionsString)\(commandPatterns) \"\(rootPath!)\""
@@ -127,6 +131,10 @@ class ImagesList: ListGeneratorHelper {
       return true
     } else if usedImageString.contains("Images.\(method)") {
       return true
+    } else if usedImageString.contains("UIImage(named: \"\(image)\")") {
+      return true
+    } else if usedImageString.contains("[UIImage imageNamed:@\"\(image)\"]") {
+      return true
     }
 
     if swift {
@@ -138,7 +146,7 @@ class ImagesList: ListGeneratorHelper {
 
       if fileWriter.warningMessage == nil {
         fileWriter.warningMessage = notUsedMessage
-      } else  if !fileWriter.warningMessage!.contains("ImageNotUsed") {
+      } else if !fileWriter.warningMessage!.contains("ImageNotUsed") {
         fileWriter.warningMessage!.append(notUsedMessage)
       }
     }
@@ -171,6 +179,7 @@ class ImagesList: ListGeneratorHelper {
 
     // Command to find results
     let command = "grep -i -r\(includeExtensionsString) \"image=\\\"*\\\"\" \"\(rootPath!)\""
+    var hasMissingImage = false
     if var result = ListGeneratorHelper.runStringAsCommand(command) {
       // Filter the Results
       var filteredResults: [String] = []
@@ -184,7 +193,6 @@ class ImagesList: ListGeneratorHelper {
       result = filteredResults.joined(separator: "\n")
 
       // Find the missing images
-      var hasMissingImage = false
       do {
         let regex = try NSRegularExpression(pattern: "image=\".*?\"", options: NSRegularExpression.Options())
         let regexMatches = regex.matches(in: result, options: NSRegularExpression.MatchingOptions(), range: NSMakeRange(0, result.count))
@@ -215,20 +223,21 @@ class ImagesList: ListGeneratorHelper {
           }
         }
       } catch {}
+    }
 
-      // Add Warning Message to output file only needed for swift
-      if hasMissingImage && swift {
-        var missingImageMessage = ""
-        missingImageMessage.append("  /// Warning message so console is notified.\n")
-        missingImageMessage.append("  @available(iOS, deprecated: 1.0, message: \"Missing Storyboard or Nib Image\")\n")
-        missingImageMessage.append("  private func MissingImage(){}\n\n")
+    // Add Warning Message to output file only needed for swift
+    if hasMissingImage && swift {
+      var missingImageMessage = ""
+      missingImageMessage.append("  /// Warning message so console is notified.\n")
+      missingImageMessage.append("  @available(iOS, deprecated: 1.0, message: \"Missing Storyboard or Nib Image\")\n")
+      missingImageMessage.append("  private func MissingImage(){}\n\n")
 
-        if fileWriter.warningMessage == nil {
-          fileWriter.warningMessage = missingImageMessage
-        } else  if !fileWriter.warningMessage!.contains("MissingImage") {
-          fileWriter.warningMessage!.append(missingImageMessage)
-        }
+      if fileWriter.warningMessage == nil {
+        fileWriter.warningMessage = missingImageMessage
+      } else  if !fileWriter.warningMessage!.contains("MissingImage") {
+        fileWriter.warningMessage!.append(missingImageMessage)
       }
     }
   }
+
 }

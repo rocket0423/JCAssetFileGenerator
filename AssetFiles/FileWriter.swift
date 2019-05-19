@@ -21,10 +21,10 @@ class FileWriter: NSObject {
   var singleFile: Bool = true
   var swift: Bool = true
 
-  func writeOutputFile() {
+  func writeOutputFile() -> Bool {
     if outputMethods.count == 0 {
       // Nothing to write
-      return
+      return false
     }
     outputFileName = outputFileName.replacingOccurrences(of: " ", with: "")
 
@@ -34,6 +34,7 @@ class FileWriter: NSObject {
     } else {
       writeObjCFile()
     }
+    return true
   }
 
   private func writeSwiftFile() {

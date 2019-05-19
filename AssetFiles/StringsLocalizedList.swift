@@ -13,7 +13,6 @@ class StringsLocalizedList: ListGeneratorHelper {
   var needTranslationKeys: [String] = []
   var devMessages: [String : String] = [:]
   var keys: [String] = []
-  let needTranslationText = " // Needs Translation"
   let noMessageText = "/* No comment provided by engineer. */"
 
   override class func fileExtensions() -> [String] {
@@ -37,7 +36,7 @@ class StringsLocalizedList: ListGeneratorHelper {
     var hasTranslations = false
     let lprojPath = (parseFilePath as NSString).deletingLastPathComponent
     if lprojPath.hasSuffix(".lproj") {
-      if !lprojPath.hasSuffix("Base.lproj") {
+      if !(lprojPath.hasSuffix("Base.lproj") || lprojPath.hasSuffix("en.lproj")) {
         // This is a translation file and not the main one so skip.
         return
       }
@@ -65,7 +64,10 @@ class StringsLocalizedList: ListGeneratorHelper {
         let localizedString = formattedValue(nextValue)
         let nextKeyString = formattedValue(nextKey)
         let methodName = ListGeneratorHelper.methodName(nextKeyString)
-        let devComment = devMessageForKey(nextKey)
+        var devComment = devMessageForKey(nextKey)
+        if devComment != nil {
+          devComment = formattedValue(devComment!)
+        }
         if ListGeneratorHelper.isStringEmptyNoWhite(methodName) {
           // If the string is empty lets skip it and just continue.
           continue
@@ -125,6 +127,8 @@ class StringsLocalizedList: ListGeneratorHelper {
           fileWriter.outputMethods.append(implementation)
         }
       }
+    } else {
+      print("Could not parse file path \(parseFilePath!)")
     }
   }
 
@@ -132,8 +136,7 @@ class StringsLocalizedList: ListGeneratorHelper {
     var hasTranslations = false
 
     let currentFileFolder = ((parseFilePath as NSString).deletingLastPathComponent as NSString).deletingLastPathComponent
-    var mainString = ""
-    var mainComponents: [String]!
+    var mainComponents: [String]?
     for nextFile in allFilePaths {
       if nextFile == parseFilePath || (parseFilePath as NSString).lastPathComponent != (nextFile as NSString).lastPathComponent {
         // Not the same strings file
@@ -144,31 +147,46 @@ class StringsLocalizedList: ListGeneratorHelper {
         // Not the same strings file
         continue
       }
+
       // Get the components of the main file if we haven't already
-      if mainString.isEmpty {
-        do {
-          mainString = try String(contentsOf: URL(fileURLWithPath: parseFilePath), encoding: .utf8)
-          mainComponents = mainString.components(separatedBy: CharacterSet.newlines)
-        } catch {
+      if mainComponents == nil {
+        if let contents = contentsOfFile(parseFilePath) {
+          mainComponents = contents.components
+        } else {
+          // Could not parse the file should continue
+          continue
+        }
+      } else if !verify && !helper {
+        // We just needed to get the dev messages on the first pass so now we know if we have translations or not and we got the dev messages.
+        return hasTranslations
+      }
+
+      // Get the components of the next file. This is only used if we are doing the helper methods or verify methods
+      var nextFileComponents: [String]? = nil
+      var nextFileEncoding: String.Encoding?
+      if helper || verify {
+        if let contents = contentsOfFile(nextFile) {
+          nextFileComponents = contents.components
+          nextFileEncoding = contents.encoding
+        } else {
+          // Could not parse the file should continue
           continue
         }
       }
 
-      // Get the components of the next file
-      var nextFileString: String!
-      do {
-        nextFileString = try String(contentsOf: URL(fileURLWithPath: nextFile), encoding: .utf8)
-      } catch {
-        continue
+      // Translation file should only be written to if we are doing the helper methods
+      var translationFile: String? = nil
+      var missingTranslationFile: String? = nil
+      if helper {
+        translationFile = ""
+        missingTranslationFile = ""
       }
-
-      let nextFileComponents = nextFileString.components(separatedBy: CharacterSet.newlines)
 
       // Start Adding all the appropriate tranlations to the files
       var devMessage: String? = nil
       var devMessageHas: Bool = false
-      var translationFile = ""
-      for nextMainComponent in mainComponents {
+      var lastComment: String? = nil
+      for nextMainComponent in mainComponents! {
         // Figure out dev comments
         devMessageHas = false
         if nextMainComponent.hasPrefix("/*") && nextMainComponent.hasSuffix("*/") && nextMainComponent != noMessageText {
@@ -183,23 +201,35 @@ class StringsLocalizedList: ListGeneratorHelper {
 
         // Get Translation info
         if !nextMainComponent.hasPrefix("\"") {
-          translationFile.append(nextMainComponent)
+          translationFile?.append(nextMainComponent)
+          // Store the comment so we can determine later if we need to write it for the missing translation file
+          lastComment = nextMainComponent
         } else {
           let key = keyForComponent(nextMainComponent)
-          if let translation = stringForKey(keyForComponent(nextMainComponent), components: nextFileComponents) {
-            translationFile.append(translation)
-          } else {
-            translationFile.append(nextMainComponent + needTranslationText)
+          if helper || verify {
+            if let translation = stringForKey(keyForComponent(nextMainComponent), components: nextFileComponents!) {
+              translationFile?.append(translation)
+            } else {
+              // Write that we are missing a translation in the language file.
+              translationFile?.append("// Missing Translation - \(nextMainComponent)")
+
+              // For missing translation see if we have a comment
+              if lastComment != nil {
+                missingTranslationFile?.append(lastComment!)
+                missingTranslationFile?.append("\n")
+              }
+              missingTranslationFile?.append(nextMainComponent)
+            }
           }
+
+          // Clear the last comment
+          lastComment = nil
 
           // Dev Comments end of string
           if devMessage == nil {
             if let range = nextMainComponent.range(of: "//") {
-              var endMessage: String = String(nextMainComponent[range.upperBound..<nextMainComponent.endIndex])
-              endMessage = endMessage.trimmingCharacters(in: .whitespacesAndNewlines)
-              if needTranslationText != " // \(endMessage)" {
-                devMessage = endMessage
-              }
+              let endMessage: String = String(nextMainComponent[range.upperBound..<nextMainComponent.endIndex])
+              devMessage = endMessage.trimmingCharacters(in: .whitespacesAndNewlines)
             }
           }
           // If we have a key and a message add it to the devMessages dict for future use.
@@ -209,20 +239,46 @@ class StringsLocalizedList: ListGeneratorHelper {
           }
         }
 
-        translationFile.append("\n")
+        translationFile?.append("\n")
+        missingTranslationFile?.append("\n")
 
         // If we passed the line then this is not a dev message so erase it.
         if !devMessageHas {
           devMessage = nil
         }
       }
-      translationFile = "\(translationFile.dropLast())"
+
+      if helper {
+        translationFile = "\(translationFile!.dropLast())"
+        missingTranslationFile = "\(missingTranslationFile!.dropLast())"
+      }
 
       // Only create the file if the user wants the helper code enabled.
       // We still go through the creation of the file because of seeing which items need translation.
       if helper {
         do {
-          try translationFile.write(to: URL(fileURLWithPath: nextFile), atomically: true, encoding: .utf8)
+          // ReOrganized Translation File
+          let nextFileURL = URL(fileURLWithPath: nextFile)
+          try translationFile?.write(to: nextFileURL, atomically: true, encoding: nextFileEncoding!)
+
+          if !missingTranslationFile!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            var fullFileURL = URL(fileURLWithPath: fileWriter.outputBasePath!)
+            fullFileURL.appendPathComponent("Needs Translations")
+            try FileManager.default.createDirectory(at: fullFileURL, withIntermediateDirectories: true, attributes: nil)
+
+
+
+            let fileName = nextFileURL.deletingPathExtension().lastPathComponent
+            let languageFolder = nextFileURL.deletingLastPathComponent().deletingPathExtension().lastPathComponent
+            fullFileURL.appendPathComponent("\(fileName)-\(languageFolder)")
+            fullFileURL.appendPathExtension(nextFileURL.pathExtension)
+
+            // Remove all the extra lines in the translation file
+            while missingTranslationFile!.contains("\n\n\n") {
+              missingTranslationFile = missingTranslationFile?.replacingOccurrences(of: "\n\n\n", with: "\n\n")
+            }
+            try missingTranslationFile?.write(to: fullFileURL, atomically: true, encoding: nextFileEncoding!)
+          }
         } catch {}
       }
 
@@ -239,9 +295,6 @@ class StringsLocalizedList: ListGeneratorHelper {
     for nextComponent in components {
       if nextComponent.hasPrefix("\"") {
         if key == keyForComponent(nextComponent) {
-          if nextComponent.hasSuffix(needTranslationText) {
-            needTranslationKeys.append(key!)
-          }
           return nextComponent
         }
       }
@@ -271,4 +324,22 @@ class StringsLocalizedList: ListGeneratorHelper {
     }
     return nil
   }
+
+  private func contentsOfFile(_ filePath: String) -> (components: [String], encoding: String.Encoding)? {
+    let encodingTypes: [String.Encoding] = [.utf8, .utf16, .utf32]
+    for nextEncodingType in encodingTypes {
+      do {
+        let parsedString = try String(contentsOf: URL(fileURLWithPath: filePath), encoding: nextEncodingType)
+        let parsedComponents = parsedString.components(separatedBy: CharacterSet.newlines)
+        return (components: parsedComponents, encoding: nextEncodingType)
+      } catch {
+        // Possible the file is of a different string ecoding we should just try the next encoding
+        continue
+      }
+    }
+
+    // Couldn't parse the file return nil
+    return nil
+  }
+
 }
