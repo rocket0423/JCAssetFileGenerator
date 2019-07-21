@@ -23,21 +23,24 @@
 		B934B3A120FA61C40060BB43 /* ImagesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934B38320FA5B440060BB43 /* ImagesList.swift */; };
 		B934B3A220FA61C40060BB43 /* CustomFontList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934B38220FA5B440060BB43 /* CustomFontList.swift */; };
 		B934B3A320FA61C40060BB43 /* ColorList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934B38420FA5B440060BB43 /* ColorList.swift */; };
-		B934B3C020FA64A70060BB43 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934B3A520FA64A70060BB43 /* Strings.swift */; };
-		B934B3C120FA64A70060BB43 /* Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = B934B3A620FA64A70060BB43 /* Strings.m */; };
-		B934B3C220FA64A70060BB43 /* BPNonLoclizedStringsStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934B3A720FA64A70060BB43 /* BPNonLoclizedStringsStrings.swift */; };
-		B934B3C520FA64A70060BB43 /* Identifiers.m in Sources */ = {isa = PBXBuildFile; fileRef = B934B3AC20FA64A70060BB43 /* Identifiers.m */; };
-		B934B3C620FA64A70060BB43 /* BPLaunchScreenStoryboardIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934B3AD20FA64A70060BB43 /* BPLaunchScreenStoryboardIdentifiers.swift */; };
-		B934B3C720FA64A70060BB43 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934B3AF20FA64A70060BB43 /* Identifiers.swift */; };
-		B934B3C820FA64A70060BB43 /* BPMainStoryboardIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934B3B020FA64A70060BB43 /* BPMainStoryboardIdentifiers.swift */; };
-		B934B3C920FA64A70060BB43 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934B3B320FA64A70060BB43 /* Fonts.swift */; };
-		B934B3CA20FA64A70060BB43 /* Fonts.m in Sources */ = {isa = PBXBuildFile; fileRef = B934B3B420FA64A70060BB43 /* Fonts.m */; };
-		B934B3CD20FA64A70060BB43 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934B3B920FA64A70060BB43 /* Images.swift */; };
-		B934B3CE20FA64A70060BB43 /* BPColorsAssetsColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934B3BB20FA64A70060BB43 /* BPColorsAssetsColors.swift */; };
-		B934B3CF20FA64A70060BB43 /* BPColorsStringsColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934B3BC20FA64A70060BB43 /* BPColorsStringsColors.swift */; };
-		B934B3D020FA64A70060BB43 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934B3BE20FA64A70060BB43 /* Colors.swift */; };
-		B934B3D120FA64A70060BB43 /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = B934B3BF20FA64A70060BB43 /* Colors.m */; };
 		B934B3DF20FAA76A0060BB43 /* NonLoclizedStrings.strings in Resources */ = {isa = PBXBuildFile; fileRef = B934B3E120FAA76A0060BB43 /* NonLoclizedStrings.strings */; };
+		B99BE41B22E4D23B003EE154 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99BE41A22E4D23B003EE154 /* Colors.swift */; };
+		B99BE41E22E4D248003EE154 /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = B99BE41D22E4D248003EE154 /* Colors.m */; };
+		B99BE42122E4D251003EE154 /* BPColorsStringsColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99BE41F22E4D251003EE154 /* BPColorsStringsColors.swift */; };
+		B99BE42222E4D251003EE154 /* BPColorsAssetsColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99BE42022E4D251003EE154 /* BPColorsAssetsColors.swift */; };
+		B99BE42422E4D265003EE154 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99BE42322E4D265003EE154 /* Fonts.swift */; };
+		B99BE42722E4D26C003EE154 /* Fonts.m in Sources */ = {isa = PBXBuildFile; fileRef = B99BE42522E4D26C003EE154 /* Fonts.m */; };
+		B99BE42922E4D276003EE154 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99BE42822E4D276003EE154 /* Identifiers.swift */; };
+		B99BE42F22E4D283003EE154 /* BPMainStoryboardIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99BE42D22E4D283003EE154 /* BPMainStoryboardIdentifiers.swift */; };
+		B99BE43022E4D283003EE154 /* BPLaunchScreenStoryboardIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99BE42E22E4D283003EE154 /* BPLaunchScreenStoryboardIdentifiers.swift */; };
+		B99BE43322E4D28C003EE154 /* Identifiers.m in Sources */ = {isa = PBXBuildFile; fileRef = B99BE43222E4D28C003EE154 /* Identifiers.m */; };
+		B99BE43522E4D293003EE154 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99BE43422E4D293003EE154 /* Images.swift */; };
+		B99BE43822E4D298003EE154 /* Images.m in Sources */ = {isa = PBXBuildFile; fileRef = B99BE43622E4D298003EE154 /* Images.m */; };
+		B99BE43A22E4D29C003EE154 /* BPImagesImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99BE43922E4D29C003EE154 /* BPImagesImages.swift */; };
+		B99BE43C22E4D2A2003EE154 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99BE43B22E4D2A2003EE154 /* Strings.swift */; };
+		B99BE43F22E4D2A8003EE154 /* Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = B99BE43E22E4D2A8003EE154 /* Strings.m */; };
+		B99BE44122E4D2AD003EE154 /* BPNonLoclizedStringsStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99BE44022E4D2AD003EE154 /* BPNonLoclizedStringsStrings.swift */; };
+		B9D9D5E822E3D7450070EB5F /* Crypto+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D9D5E722E3D7450070EB5F /* Crypto+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -72,26 +75,30 @@
 		B934B38720FA5B440060BB43 /* ListGeneratorHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListGeneratorHelper.swift; sourceTree = "<group>"; };
 		B934B39520FA618E0060BB43 /* AssetFiles */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AssetFiles; sourceTree = BUILT_PRODUCTS_DIR; };
 		B934B39720FA618E0060BB43 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		B934B3A520FA64A70060BB43 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
-		B934B3A620FA64A70060BB43 /* Strings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Strings.m; sourceTree = "<group>"; };
-		B934B3A720FA64A70060BB43 /* BPNonLoclizedStringsStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BPNonLoclizedStringsStrings.swift; sourceTree = "<group>"; };
-		B934B3AA20FA64A70060BB43 /* Strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Strings.h; sourceTree = "<group>"; };
-		B934B3AC20FA64A70060BB43 /* Identifiers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Identifiers.m; sourceTree = "<group>"; };
-		B934B3AD20FA64A70060BB43 /* BPLaunchScreenStoryboardIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BPLaunchScreenStoryboardIdentifiers.swift; sourceTree = "<group>"; };
-		B934B3AE20FA64A70060BB43 /* Identifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Identifiers.h; sourceTree = "<group>"; };
-		B934B3AF20FA64A70060BB43 /* Identifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
-		B934B3B020FA64A70060BB43 /* BPMainStoryboardIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BPMainStoryboardIdentifiers.swift; sourceTree = "<group>"; };
-		B934B3B220FA64A70060BB43 /* Fonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fonts.h; sourceTree = "<group>"; };
-		B934B3B320FA64A70060BB43 /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
-		B934B3B420FA64A70060BB43 /* Fonts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fonts.m; sourceTree = "<group>"; };
-		B934B3B920FA64A70060BB43 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
-		B934B3BB20FA64A70060BB43 /* BPColorsAssetsColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BPColorsAssetsColors.swift; sourceTree = "<group>"; };
-		B934B3BC20FA64A70060BB43 /* BPColorsStringsColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BPColorsStringsColors.swift; sourceTree = "<group>"; };
-		B934B3BD20FA64A70060BB43 /* Colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Colors.h; sourceTree = "<group>"; };
-		B934B3BE20FA64A70060BB43 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		B934B3BF20FA64A70060BB43 /* Colors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Colors.m; sourceTree = "<group>"; };
 		B934B3E220FAA76B0060BB43 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/NonLoclizedStrings.strings; sourceTree = "<group>"; };
 		B934B3E320FAA7A80060BB43 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/NonLoclizedStrings.strings; sourceTree = "<group>"; };
+		B99BE41A22E4D23B003EE154 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Colors.swift; path = 1/Colors.swift; sourceTree = "<group>"; };
+		B99BE41C22E4D248003EE154 /* Colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Colors.h; path = 2/Colors.h; sourceTree = "<group>"; };
+		B99BE41D22E4D248003EE154 /* Colors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Colors.m; path = 2/Colors.m; sourceTree = "<group>"; };
+		B99BE41F22E4D251003EE154 /* BPColorsStringsColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BPColorsStringsColors.swift; path = 3/BPColorsStringsColors.swift; sourceTree = "<group>"; };
+		B99BE42022E4D251003EE154 /* BPColorsAssetsColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BPColorsAssetsColors.swift; path = 3/BPColorsAssetsColors.swift; sourceTree = "<group>"; };
+		B99BE42322E4D265003EE154 /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Fonts.swift; path = 1/Fonts.swift; sourceTree = "<group>"; };
+		B99BE42522E4D26C003EE154 /* Fonts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Fonts.m; path = 2/Fonts.m; sourceTree = "<group>"; };
+		B99BE42622E4D26C003EE154 /* Fonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Fonts.h; path = 2/Fonts.h; sourceTree = "<group>"; };
+		B99BE42822E4D276003EE154 /* Identifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Identifiers.swift; path = 1/Identifiers.swift; sourceTree = "<group>"; };
+		B99BE42D22E4D283003EE154 /* BPMainStoryboardIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BPMainStoryboardIdentifiers.swift; path = 3/BPMainStoryboardIdentifiers.swift; sourceTree = "<group>"; };
+		B99BE42E22E4D283003EE154 /* BPLaunchScreenStoryboardIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BPLaunchScreenStoryboardIdentifiers.swift; path = 3/BPLaunchScreenStoryboardIdentifiers.swift; sourceTree = "<group>"; };
+		B99BE43122E4D28C003EE154 /* Identifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Identifiers.h; path = 2/Identifiers.h; sourceTree = "<group>"; };
+		B99BE43222E4D28C003EE154 /* Identifiers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Identifiers.m; path = 2/Identifiers.m; sourceTree = "<group>"; };
+		B99BE43422E4D293003EE154 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Images.swift; path = 1/Images.swift; sourceTree = "<group>"; };
+		B99BE43622E4D298003EE154 /* Images.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Images.m; path = 2/Images.m; sourceTree = "<group>"; };
+		B99BE43722E4D298003EE154 /* Images.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Images.h; path = 2/Images.h; sourceTree = "<group>"; };
+		B99BE43922E4D29C003EE154 /* BPImagesImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BPImagesImages.swift; path = 3/BPImagesImages.swift; sourceTree = "<group>"; };
+		B99BE43B22E4D2A2003EE154 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Strings.swift; path = 1/Strings.swift; sourceTree = "<group>"; };
+		B99BE43D22E4D2A8003EE154 /* Strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Strings.h; path = 2/Strings.h; sourceTree = "<group>"; };
+		B99BE43E22E4D2A8003EE154 /* Strings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Strings.m; path = 2/Strings.m; sourceTree = "<group>"; };
+		B99BE44022E4D2AD003EE154 /* BPNonLoclizedStringsStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BPNonLoclizedStringsStrings.swift; path = 3/BPNonLoclizedStringsStrings.swift; sourceTree = "<group>"; };
+		B9D9D5E722E3D7450070EB5F /* Crypto+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Crypto+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +177,7 @@
 				B934B38320FA5B440060BB43 /* ImagesList.swift */,
 				B934B38520FA5B440060BB43 /* StoryboardIdentifiersList.swift */,
 				B934B38620FA5B440060BB43 /* StringsLocalizedList.swift */,
+				B9D9D5E722E3D7450070EB5F /* Crypto+Extensions.swift */,
 				B934B39720FA618E0060BB43 /* main.swift */,
 			);
 			path = AssetFiles;
@@ -178,10 +186,10 @@
 		B934B3A420FA64A70060BB43 /* Strings */ = {
 			isa = PBXGroup;
 			children = (
-				B934B3A520FA64A70060BB43 /* Strings.swift */,
-				B934B3AA20FA64A70060BB43 /* Strings.h */,
-				B934B3A620FA64A70060BB43 /* Strings.m */,
-				B934B3A720FA64A70060BB43 /* BPNonLoclizedStringsStrings.swift */,
+				B99BE43B22E4D2A2003EE154 /* Strings.swift */,
+				B99BE43D22E4D2A8003EE154 /* Strings.h */,
+				B99BE43E22E4D2A8003EE154 /* Strings.m */,
+				B99BE44022E4D2AD003EE154 /* BPNonLoclizedStringsStrings.swift */,
 			);
 			path = Strings;
 			sourceTree = "<group>";
@@ -189,11 +197,11 @@
 		B934B3AB20FA64A70060BB43 /* Identifiers */ = {
 			isa = PBXGroup;
 			children = (
-				B934B3AC20FA64A70060BB43 /* Identifiers.m */,
-				B934B3AD20FA64A70060BB43 /* BPLaunchScreenStoryboardIdentifiers.swift */,
-				B934B3AE20FA64A70060BB43 /* Identifiers.h */,
-				B934B3AF20FA64A70060BB43 /* Identifiers.swift */,
-				B934B3B020FA64A70060BB43 /* BPMainStoryboardIdentifiers.swift */,
+				B99BE42822E4D276003EE154 /* Identifiers.swift */,
+				B99BE43122E4D28C003EE154 /* Identifiers.h */,
+				B99BE43222E4D28C003EE154 /* Identifiers.m */,
+				B99BE42E22E4D283003EE154 /* BPLaunchScreenStoryboardIdentifiers.swift */,
+				B99BE42D22E4D283003EE154 /* BPMainStoryboardIdentifiers.swift */,
 			);
 			path = Identifiers;
 			sourceTree = "<group>";
@@ -201,9 +209,9 @@
 		B934B3B120FA64A70060BB43 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				B934B3B220FA64A70060BB43 /* Fonts.h */,
-				B934B3B320FA64A70060BB43 /* Fonts.swift */,
-				B934B3B420FA64A70060BB43 /* Fonts.m */,
+				B99BE42322E4D265003EE154 /* Fonts.swift */,
+				B99BE42622E4D26C003EE154 /* Fonts.h */,
+				B99BE42522E4D26C003EE154 /* Fonts.m */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -211,7 +219,10 @@
 		B934B3B520FA64A70060BB43 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				B934B3B920FA64A70060BB43 /* Images.swift */,
+				B99BE43422E4D293003EE154 /* Images.swift */,
+				B99BE43722E4D298003EE154 /* Images.h */,
+				B99BE43622E4D298003EE154 /* Images.m */,
+				B99BE43922E4D29C003EE154 /* BPImagesImages.swift */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -219,11 +230,11 @@
 		B934B3BA20FA64A70060BB43 /* Colors */ = {
 			isa = PBXGroup;
 			children = (
-				B934B3BB20FA64A70060BB43 /* BPColorsAssetsColors.swift */,
-				B934B3BC20FA64A70060BB43 /* BPColorsStringsColors.swift */,
-				B934B3BD20FA64A70060BB43 /* Colors.h */,
-				B934B3BE20FA64A70060BB43 /* Colors.swift */,
-				B934B3BF20FA64A70060BB43 /* Colors.m */,
+				B99BE41A22E4D23B003EE154 /* Colors.swift */,
+				B99BE41C22E4D248003EE154 /* Colors.h */,
+				B99BE41D22E4D248003EE154 /* Colors.m */,
+				B99BE42022E4D251003EE154 /* BPColorsAssetsColors.swift */,
+				B99BE41F22E4D251003EE154 /* BPColorsStringsColors.swift */,
 			);
 			path = Colors;
 			sourceTree = "<group>";
@@ -279,6 +290,7 @@
 				TargetAttributes = {
 					B934B2EE20FA584C0060BB43 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1020;
 					};
 					B934B39420FA618E0060BB43 = {
 						CreatedOnToolsVersion = 9.4.1;
@@ -334,7 +346,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "DERIVED_SOURCES=\"$SRCROOT/JCAssetFileGenerator/Generated\"\nEXECUTABLES=\"$SRCROOT/Executables\"\n\nIDENTIFIERS_PATH=\"$DERIVED_SOURCES/Identifiers\"\nCATALOGS_PATH=\"$DERIVED_SOURCES/Images\"\nFONTS_PATH=\"$DERIVED_SOURCES/Fonts\"\nCOLORS_PATH=\"$DERIVED_SOURCES/Colors\"\nSTRINGS_PATH=\"$DERIVED_SOURCES/Strings\"\n\nrm -rf \"$IDENTIFIERS_PATH\"\nrm -rf \"$CATALOGS_PATH\"\nrm -rf \"$FONTS_PATH\"\nrm -rf \"$COLORS_PATH\"\nrm -rf \"$STRINGS_PATH\"\nmkdir -p \"$IDENTIFIERS_PATH\"\nmkdir -p \"$CATALOGS_PATH\"\nmkdir -p \"$FONTS_PATH\"\nmkdir -p \"$COLORS_PATH\"\nmkdir -p \"$STRINGS_PATH\"\n\n\n# Simple Color File From All Sources\n\"$EXECUTABLES/AssetFiles\" -colors -o \"$COLORS_PATH\"\n# Simple Color File From All Sources in objective c\n\"$EXECUTABLES/AssetFiles\" -colors -o \"$COLORS_PATH\" -objc\n# Multiple Color Files With Prefix\n\"$EXECUTABLES/AssetFiles\" -colors -o \"$COLORS_PATH\" -p BP -m\n# Simple Identifiers File From All Sources\n\"$EXECUTABLES/AssetFiles\" -identifiers -o \"$IDENTIFIERS_PATH\"\n# Simple Identifiers File From All Sources in objective c\n\"$EXECUTABLES/AssetFiles\" -identifiers -o \"$IDENTIFIERS_PATH\" -objc\n# Multiple Identifier Files With Prefix\n\"$EXECUTABLES/AssetFiles\" -identifiers -o \"$IDENTIFIERS_PATH\" -p BP -m\n# Simple Fonts File From all Font Files\n\"$EXECUTABLES/AssetFiles\" -fonts -o \"$FONTS_PATH\"\n# Simple Fonts File From all Font Files in objective c\n\"$EXECUTABLES/AssetFiles\" -fonts -o \"$FONTS_PATH\" -objc\n# Simple Images File From All Sources\n\"$EXECUTABLES/AssetFiles\" -images -o \"$CATALOGS_PATH\"\n# Simple Images File From All Sources in objective c\n\"$EXECUTABLES/AssetFiles\" -images -o \"$CATALOGS_PATH\" -objc\n# Multiple Images Files With Prefix\n\"$EXECUTABLES/AssetFiles\" -images -o \"$CATALOGS_PATH\" -p BP -m -dnverify\n# Simple Strings File From All Sources\n\"$EXECUTABLES/AssetFiles\" -strings -o \"$STRINGS_PATH\" -dnhelp\n# Simple Strings File From All Sources in objective c\n\"$EXECUTABLES/AssetFiles\" -strings -o \"$STRINGS_PATH\" -objc -dnhelp\n# Multiple Strings Files With Prefix\n\"$EXECUTABLES/AssetFiles\" -strings -o \"$STRINGS_PATH\" -p BP -m -dnhelp -dnverify\n";
+			shellScript = "DERIVED_SOURCES=\"$SRCROOT/JCAssetFileGenerator/Generated\"\nEXECUTABLES=\"$SRCROOT/Executables\"\n\nIDENTIFIERS_PATH=\"$DERIVED_SOURCES/Identifiers\"\nCATALOGS_PATH=\"$DERIVED_SOURCES/Images\"\nFONTS_PATH=\"$DERIVED_SOURCES/Fonts\"\nCOLORS_PATH=\"$DERIVED_SOURCES/Colors\"\nSTRINGS_PATH=\"$DERIVED_SOURCES/Strings\"\n\n# Simple Color File From All Sources\n\"$EXECUTABLES/AssetFiles\" -colors -o \"$COLORS_PATH/1\"\n# Simple Color File From All Sources in objective c\n\"$EXECUTABLES/AssetFiles\" -colors -o \"$COLORS_PATH/2\" -objc\n# Multiple Color Files With Prefix\n\"$EXECUTABLES/AssetFiles\" -colors -o \"$COLORS_PATH/3\" -p BP -m\n# Simple Identifiers File From All Sources\n\"$EXECUTABLES/AssetFiles\" -identifiers -o \"$IDENTIFIERS_PATH/1\"\n# Simple Identifiers File From All Sources in objective c\n\"$EXECUTABLES/AssetFiles\" -identifiers -o \"$IDENTIFIERS_PATH/2\" -objc\n# Multiple Identifier Files With Prefix\n\"$EXECUTABLES/AssetFiles\" -identifiers -o \"$IDENTIFIERS_PATH/3\" -p BP -m\n# Simple Fonts File From all Font Files\n\"$EXECUTABLES/AssetFiles\" -fonts -o \"$FONTS_PATH/1\"\n# Simple Fonts File From all Font Files in objective c\n\"$EXECUTABLES/AssetFiles\" -fonts -o \"$FONTS_PATH/2\" -objc\n# Simple Images File From All Sources\n\"$EXECUTABLES/AssetFiles\" -images -o \"$CATALOGS_PATH/1\"\n# Simple Images File From All Sources in objective c\n\"$EXECUTABLES/AssetFiles\" -images -o \"$CATALOGS_PATH/2\" -objc\n# Multiple Images Files With Prefix\n\"$EXECUTABLES/AssetFiles\" -images -o \"$CATALOGS_PATH/3\" -p BP -m -dnverify\n# Simple Strings File From All Sources\n\"$EXECUTABLES/AssetFiles\" -strings -o \"$STRINGS_PATH/1\" -dnhelp\n# Simple Strings File From All Sources in objective c\n\"$EXECUTABLES/AssetFiles\" -strings -o \"$STRINGS_PATH/2\" -objc -dnhelp\n# Multiple Strings Files With Prefix\n\"$EXECUTABLES/AssetFiles\" -strings -o \"$STRINGS_PATH/3\" -p BP -m -dnhelp -dnverify\n\n# Flock Testing\n#BASE_FOLDER=\"$SRCROOT/../flock4-iOS\"\n#GENERATED_FOLDER=\"$BASE_FOLDER/Generated\"\n\n# I would like to verify but it will take some time to fix the project so we could do that\n#\"$EXECUTABLES/AssetFiles\" -identifiers -images -colors -o \"$GENERATED_FOLDER\" -s \"$BASE_FOLDER\" -dnverify\n#\"$EXECUTABLES/AssetFiles\" -fonts -o \"$GENERATED_FOLDER\" -s \"$BASE_FOLDER\" -dnverify\n#\"$EXECUTABLES/AssetFiles\" -fonts -o \"$GENERATED_FOLDER\" -dnverify\n# We don't verify Strings since it can take a minute since we have a lot of strings\n#\"$EXECUTABLES/AssetFiles\" -strings -o \"$GENERATED_FOLDER\" -m -s \"$BASE_FOLDER\" -dnhelp -dnverify\n";
 		};
 		B934B39C20FA61A20060BB43 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -356,22 +368,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B934B3C220FA64A70060BB43 /* BPNonLoclizedStringsStrings.swift in Sources */,
+				B99BE42422E4D265003EE154 /* Fonts.swift in Sources */,
+				B99BE42122E4D251003EE154 /* BPColorsStringsColors.swift in Sources */,
+				B99BE43C22E4D2A2003EE154 /* Strings.swift in Sources */,
+				B99BE44122E4D2AD003EE154 /* BPNonLoclizedStringsStrings.swift in Sources */,
 				B934B2F520FA584C0060BB43 /* ViewController.swift in Sources */,
-				B934B3C020FA64A70060BB43 /* Strings.swift in Sources */,
-				B934B3C120FA64A70060BB43 /* Strings.m in Sources */,
-				B934B3C920FA64A70060BB43 /* Fonts.swift in Sources */,
-				B934B3D120FA64A70060BB43 /* Colors.m in Sources */,
-				B934B3CA20FA64A70060BB43 /* Fonts.m in Sources */,
+				B99BE42222E4D251003EE154 /* BPColorsAssetsColors.swift in Sources */,
+				B99BE43522E4D293003EE154 /* Images.swift in Sources */,
+				B99BE43A22E4D29C003EE154 /* BPImagesImages.swift in Sources */,
+				B99BE42F22E4D283003EE154 /* BPMainStoryboardIdentifiers.swift in Sources */,
+				B99BE42922E4D276003EE154 /* Identifiers.swift in Sources */,
+				B99BE42722E4D26C003EE154 /* Fonts.m in Sources */,
+				B99BE43022E4D283003EE154 /* BPLaunchScreenStoryboardIdentifiers.swift in Sources */,
+				B99BE43F22E4D2A8003EE154 /* Strings.m in Sources */,
+				B99BE41E22E4D248003EE154 /* Colors.m in Sources */,
+				B99BE41B22E4D23B003EE154 /* Colors.swift in Sources */,
+				B99BE43822E4D298003EE154 /* Images.m in Sources */,
+				B99BE43322E4D28C003EE154 /* Identifiers.m in Sources */,
 				B934B2F320FA584C0060BB43 /* AppDelegate.swift in Sources */,
-				B934B3C820FA64A70060BB43 /* BPMainStoryboardIdentifiers.swift in Sources */,
-				B934B3CF20FA64A70060BB43 /* BPColorsStringsColors.swift in Sources */,
-				B934B3C520FA64A70060BB43 /* Identifiers.m in Sources */,
-				B934B3D020FA64A70060BB43 /* Colors.swift in Sources */,
-				B934B3CD20FA64A70060BB43 /* Images.swift in Sources */,
-				B934B3C720FA64A70060BB43 /* Identifiers.swift in Sources */,
-				B934B3CE20FA64A70060BB43 /* BPColorsAssetsColors.swift in Sources */,
-				B934B3C620FA64A70060BB43 /* BPLaunchScreenStoryboardIdentifiers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,6 +398,7 @@
 				B934B3A120FA61C40060BB43 /* ImagesList.swift in Sources */,
 				B934B3A020FA61C40060BB43 /* StringsLocalizedList.swift in Sources */,
 				B934B39820FA618E0060BB43 /* main.swift in Sources */,
+				B9D9D5E822E3D7450070EB5F /* Crypto+Extensions.swift in Sources */,
 				B934B3A320FA61C40060BB43 /* ColorList.swift in Sources */,
 				B934B39E20FA61C40060BB43 /* StoryboardIdentifiersList.swift in Sources */,
 				B934B39F20FA61C40060BB43 /* ListGeneratorHelper.swift in Sources */,
@@ -539,6 +554,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = MB4687D7PR;
@@ -550,6 +566,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = doubledutch.JCAssetFileGenerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Wildcard In House Distribution 2019";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -559,6 +576,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = JCAssetFileGenerator/Info.plist;

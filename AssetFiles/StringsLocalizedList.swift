@@ -19,26 +19,72 @@ class StringsLocalizedList: ListGeneratorHelper {
     return ["strings"]
   }
 
+  override class func fileSuffix() -> String {
+    return "Strings"
+  }
+
   override class func newHelper() -> ListGeneratorHelper {
     return StringsLocalizedList()
   }
 
-  override func startGeneratingInfo() {
+  override func outputFileName() -> String {
     // Get the file name with prefix and any additional info.
-    let fileName = ((parseFilePath as NSString).lastPathComponent as NSString).deletingPathExtension
-    if singleFile {
-      fileWriter.outputFileName = classPrefix + "Strings"
-    } else {
-      fileWriter.outputFileName = classPrefix + "\(fileName)Strings"
+    var fileName = ""
+    if !singleFile {
+      fileName = ((parseFilePath as NSString).lastPathComponent as NSString).deletingPathExtension
+    }
+    return classPrefix + fileName + StringsLocalizedList.fileSuffix()
+  }
+
+  override func getChecksum() -> String? {
+    if verify {
+      // Since the warnings to the file that won't go away if we do the quick check don't add the checksum
+      return nil
     }
 
+    if !singleFile {
+      let lprojPath = (parseFilePath as NSString).deletingLastPathComponent
+      if lprojPath.hasSuffix(".lproj") {
+        if !(lprojPath.hasSuffix("Base.lproj") || lprojPath.hasSuffix("en.lproj")) {
+          // This is a translation file and not the main one so skip.
+          return nil
+        }
+      }
+
+      // Hashed key for only this file
+      return stringContentsOfFile(parseFilePath)?.hashed(.md5)
+    }
+
+    // This is a single file go thorugh all of the file paths to generate the hash
+    var combinedFilesString = ""
+    for nextFile in allFilePaths {
+      let lprojPath = (nextFile as NSString).deletingLastPathComponent
+      if lprojPath.hasSuffix(".lproj") {
+        if !(lprojPath.hasSuffix("Base.lproj") || lprojPath.hasSuffix("en.lproj")) {
+          // This is a translation file and not the main one so skip.
+          continue
+        }
+      }
+
+      if let nextFileContents = stringContentsOfFile(nextFile) {
+        combinedFilesString.append(nextFileContents)
+      }
+    }
+
+    return combinedFilesString.hashed(.md5)
+  }
+
+  override func startGeneratingInfo() -> Bool {
+    // Get the file name
+    let fileName = ((parseFilePath as NSString).lastPathComponent as NSString).deletingPathExtension
+    
     // Determine if this is the main file or a translation file
     var hasTranslations = false
     let lprojPath = (parseFilePath as NSString).deletingLastPathComponent
     if lprojPath.hasSuffix(".lproj") {
       if !(lprojPath.hasSuffix("Base.lproj") || lprojPath.hasSuffix("en.lproj")) {
         // This is a translation file and not the main one so skip.
-        return
+        return false
       }
       // Update all translation files
       hasTranslations = synchronizeFiles()
@@ -130,6 +176,8 @@ class StringsLocalizedList: ListGeneratorHelper {
     } else {
       print("Could not parse file path \(parseFilePath!)")
     }
+
+    return true
   }
 
   private func synchronizeFiles() -> Bool {
@@ -322,6 +370,21 @@ class StringsLocalizedList: ListGeneratorHelper {
     if keys.count > 1 {
       return keys[1]
     }
+    return nil
+  }
+
+  private func stringContentsOfFile(_ filePath: String) -> String? {
+    let encodingTypes: [String.Encoding] = [.utf8, .utf16, .utf32]
+    for nextEncodingType in encodingTypes {
+      do {
+        return try String(contentsOf: URL(fileURLWithPath: filePath), encoding: nextEncodingType)
+      } catch {
+        // Possible the file is of a different string ecoding we should just try the next encoding
+        continue
+      }
+    }
+
+    // Couldn't parse the file return nil
     return nil
   }
 

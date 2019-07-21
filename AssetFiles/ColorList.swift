@@ -16,18 +16,24 @@ class ColorList: ListGeneratorHelper {
     return ["colors", "xcassets"]
   }
 
+  override class func fileSuffix() -> String {
+    return "Colors"
+  }
+
   override class func newHelper() -> ListGeneratorHelper {
     return ColorList()
   }
 
-  override func startGeneratingInfo() {
+  override func outputFileName() -> String {
     // Get the file name with prefix and any additional info.
     var fileName = ""
     if !singleFile {
       fileName = ((parseFilePath as NSString).lastPathComponent as NSString).deletingPathExtension
     }
-    fileWriter.outputFileName = classPrefix + "\(fileName)Colors"
+    return classPrefix + fileName + ColorList.fileSuffix()
+  }
 
+  override func startGeneratingInfo() -> Bool {
     // Get the colors
     if parseFilePath.hasSuffix("colors") {
       parseColorsFile()
@@ -37,6 +43,8 @@ class ColorList: ListGeneratorHelper {
 
     // Make sure the storyboard is not using 'xcassets' files on apps supporting older versions of the iOS.
     verifyStoryboardCompatibility()
+
+    return true
   }
 
   override func finishedGeneratingInfo() {

@@ -18,26 +18,34 @@ class FileWriter: NSObject {
   var outputHeaders: [String] = []
   var outputMethods: [String] = []
   var warningMessage: String?
+  var checksum: String?
   var singleFile: Bool = true
   var swift: Bool = true
 
+  // MARK: - Writing
+
   func writeOutputFile() -> Bool {
+    // Output the correct file type
+    if swift {
+      return writeSwiftFile()
+    } else {
+      return writeObjCFile()
+    }
+  }
+
+  private func writeSwiftFile() -> Bool {
+    // Remove the old files if they exist
+    let outputPath = (outputBasePath as NSString).appendingPathComponent(outputFileName + ".swift")
+    do { try FileManager.default.removeItem(atPath: outputPath) } catch {}
+
     if outputMethods.count == 0 {
       // Nothing to write
       return false
     }
-    outputFileName = outputFileName.replacingOccurrences(of: " ", with: "")
 
-    // Output the correct file type
-    if swift {
-      writeSwiftFile()
-    } else {
-      writeObjCFile()
-    }
-    return true
-  }
+    // Create directory if it doesn't already exist
+    do { try FileManager.default.createDirectory(atPath: outputBasePath, withIntermediateDirectories: true, attributes: nil) } catch {}
 
-  private func writeSwiftFile() {
     // Setup the header of the file
     var outputFileContent = ""
     outputFileContent.append("//\n")
@@ -64,14 +72,31 @@ class FileWriter: NSObject {
 
     outputFileContent.append("}\n")
 
+    if checksum != nil {
+      outputFileContent.append("\n// Version: \(checksum!)\n")
+    }
+
     // Write the output to a file.
-    do {
-      let outputPath = (outputBasePath as NSString).appendingPathComponent(outputFileName + ".swift")
-      try outputFileContent.write(to: URL(fileURLWithPath: outputPath), atomically: true, encoding: .utf8)
-    } catch {}
+    do { try outputFileContent.write(to: URL(fileURLWithPath: outputPath), atomically: true, encoding: .utf8) } catch {}
+
+    return true
   }
 
-  private func writeObjCFile() {
+  private func writeObjCFile() -> Bool {
+    // Remove the old files if they exist
+    let outputHeaderPath = (outputBasePath as NSString).appendingPathComponent(outputFileName + ".h")
+    let outputMainPath = (outputBasePath as NSString).appendingPathComponent(outputFileName + ".m")
+    do { try FileManager.default.removeItem(atPath: outputHeaderPath) } catch {}
+    do { try FileManager.default.removeItem(atPath: outputMainPath) } catch {}
+
+    if outputMethods.count == 0 {
+      // Nothing to write
+      return false
+    }
+
+    // Create directory if it doesn't already exist
+    do { try FileManager.default.createDirectory(atPath: outputBasePath, withIntermediateDirectories: true, attributes: nil) } catch {}
+
     // Setup the header of the file
     var outputHeaderFileContent = ""
     outputHeaderFileContent.append("//\n")
@@ -97,11 +122,12 @@ class FileWriter: NSObject {
 
     outputHeaderFileContent.append("\n@end\n")
 
+    if checksum != nil {
+      outputHeaderFileContent.append("\n// Version: \(checksum!)\n")
+    }
+
     // Write the output to a file.
-    do {
-      let outputHeaderPath = (outputBasePath as NSString).appendingPathComponent(outputFileName + ".h")
-      try outputHeaderFileContent.write(to: URL(fileURLWithPath: outputHeaderPath), atomically: true, encoding: .utf8)
-    } catch {}
+    do { try outputHeaderFileContent.write(to: URL(fileURLWithPath: outputHeaderPath), atomically: true, encoding: .utf8) } catch {}
 
     // Setup the Main Specific info
     outputMainFileContent.append("#import \"" + outputFileName + ".h\"\n\n")
@@ -121,10 +147,41 @@ class FileWriter: NSObject {
     outputMainFileContent.append("@end\n")
 
     // Write the output to a file.
+    do { try outputMainFileContent.write(to: URL(fileURLWithPath: outputMainPath), atomically: true, encoding: .utf8) } catch {}
+
+    return true
+  }
+
+  // MARK: - Helpers
+
+  func getFileChecksum() -> String? {
+    var outputPath: String!
+    if swift {
+      outputPath = (outputBasePath as NSString).appendingPathComponent(outputFileName + ".swift")
+    } else {
+      outputPath = (outputBasePath as NSString).appendingPathComponent(outputFileName + ".h")
+    }
+    
     do {
-      let outputMainPath = (outputBasePath as NSString).appendingPathComponent(outputFileName + ".m")
-      try outputMainFileContent.write(to: URL(fileURLWithPath: outputMainPath), atomically: true, encoding: .utf8)
+      let contents = try String(contentsOfFile: outputPath)
+      if let range = contents.range(of: "Version: ", options: .backwards) {
+        return contents[range.upperBound...].trimmingCharacters(in: .whitespacesAndNewlines)
+      }
     } catch {}
+
+    // We don't have the checksum so return nil
+    return nil
+  }
+
+  func getOutputFilePaths() -> [String] {
+    var outputPaths: [String] = []
+    if swift {
+      outputPaths.append(outputFileName + ".swift")
+    } else {
+      outputPaths.append(outputFileName + ".h")
+      outputPaths.append(outputFileName + ".m")
+    }
+    return outputPaths
   }
 
 }

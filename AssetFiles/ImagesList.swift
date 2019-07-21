@@ -17,18 +17,24 @@ class ImagesList: ListGeneratorHelper {
     return ["xcassets"]
   }
 
+  override class func fileSuffix() -> String {
+    return "Images"
+  }
+
   override class func newHelper() -> ListGeneratorHelper {
     return ImagesList()
   }
 
-  override func startGeneratingInfo() {
+  override func outputFileName() -> String {
     // Get the file name with prefix and any additional info.
     var fileName = ""
     if !singleFile {
       fileName = ((parseFilePath as NSString).lastPathComponent as NSString).deletingPathExtension
     }
-    fileWriter.outputFileName = classPrefix + "\(fileName)Images"
+    return classPrefix + fileName + ImagesList.fileSuffix()
+  }
 
+  override func startGeneratingInfo() -> Bool {
     // Generate the helper string to find used images.
     findUsedImages()
 
@@ -40,6 +46,8 @@ class ImagesList: ListGeneratorHelper {
         }
       }
     }
+    
+    return true
   }
 
   override func finishedGeneratingInfo() {

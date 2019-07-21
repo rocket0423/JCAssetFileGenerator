@@ -16,18 +16,24 @@ class CustomFontList: ListGeneratorHelper {
     return ["ttf"]
   }
 
+  override class func fileSuffix() -> String {
+    return "Fonts"
+  }
+
   override class func newHelper() -> ListGeneratorHelper {
     return CustomFontList()
   }
 
-  override func startGeneratingInfo() {
+  override func outputFileName() -> String {
     // Get the file name with prefix and any additional info.
     var fileName = ""
     if !singleFile {
       fileName = ListGeneratorHelper.capitalizedString(((parseFilePath as NSString).lastPathComponent as NSString).deletingPathExtension)
     }
-    fileWriter.outputFileName = classPrefix + "\(fileName)Fonts"
+    return classPrefix + fileName + CustomFontList.fileSuffix()
+  }
 
+  override func startGeneratingInfo() -> Bool {
     if let fontName = fontName() {
       let methodName = ListGeneratorHelper.methodName(fontName)
       // Add if we haven't added already or if we are in verify mode always add so it will show the error.
@@ -82,6 +88,8 @@ class CustomFontList: ListGeneratorHelper {
         }
       }
     }
+
+    return true
   }
 
   private func fontName() -> String? {

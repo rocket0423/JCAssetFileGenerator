@@ -145,57 +145,89 @@ class ListGeneratorHelper: NSObject {
       }
     }
 
-    if writeFile {
-      // Find all the files we need to parse
-      var filePaths: [String] = []
-      for fileExtension in fileExtensions() {
-        if let enumerator = FileManager.default.enumerator(atPath: searchPath) {
-          for url in enumerator {
-            if (url as! String).hasSuffix(".\(fileExtension)") {
-              filePaths.append((searchPath as NSString).appendingPathComponent(url as! String))
-            }
+    if !writeFile {
+      // User has specified not to do anything with this class.
+      return
+    }
+
+    // Find all the files we need to parse
+    var filePaths: [String] = []
+    for fileExtension in fileExtensions() {
+      if let enumerator = FileManager.default.enumerator(atPath: searchPath) {
+        for url in enumerator {
+          if (url as! String).hasSuffix(".\(fileExtension)") {
+            filePaths.append((searchPath as NSString).appendingPathComponent(url as! String))
           }
         }
       }
+    }
 
-      // Create header string of file types
-      var fileTypes = "."
-      if fileExtensions().count > 1 {
-        var firstTypes = fileExtensions()
-        let lastExtension = firstTypes.removeLast()
-        fileTypes.append(firstTypes.joined(separator: ", ."))
-        fileTypes.append(" and .\(lastExtension)")
-      } else {
-        fileTypes.append(fileExtensions().first!)
+    // Create header string of file types
+    var fileTypes = "."
+    if fileExtensions().count > 1 {
+      var firstTypes = fileExtensions()
+      let lastExtension = firstTypes.removeLast()
+      fileTypes.append(firstTypes.joined(separator: ", ."))
+      fileTypes.append(" and .\(lastExtension)")
+    } else {
+      fileTypes.append(fileExtensions().first!)
+    }
+
+    // Start generating the necessary files.
+    var fileGenerator = newHelper()
+    var fileStartDate: Date?
+    var firstPassThrough = true
+    var singleFileChecksumSame = false
+    var ouputFiles: [String] = []
+    for nextFile in filePaths {
+      if !singleFile {
+        fileStartDate = Date()
+        fileGenerator = newHelper()
+      }
+      // Setup the Generatior Information
+      fileGenerator.parseFilePath = nextFile
+      fileGenerator.searchPath = searchPath
+      fileGenerator.classPrefix = classPrefix
+      fileGenerator.infoPlist = infoPlist
+      fileGenerator.allFilePaths = filePaths
+      fileGenerator.minimumSupportVersion = minimumSupportVersion
+      fileGenerator.singleFile = singleFile
+      fileGenerator.verify = verify
+      fileGenerator.helper = helper
+      fileGenerator.swift = swift
+      // Setup The Writer information
+      fileGenerator.fileWriter.scriptName = scriptName
+      fileGenerator.fileWriter.outputBasePath = outputhPath
+      fileGenerator.fileWriter.fileTypes = fileTypes
+      fileGenerator.fileWriter.fileName = (nextFile as NSString).lastPathComponent
+      fileGenerator.fileWriter.singleFile = singleFile
+      fileGenerator.fileWriter.swift = swift
+      fileGenerator.fileWriter.outputFileName = fileGenerator.outputFileName().replacingOccurrences(of: " ", with: "")
+      ouputFiles.append(contentsOf: fileGenerator.fileWriter.getOutputFilePaths())
+
+      // Compare the checksum to see if there were any changes and if we can skip generating and writing the file.
+      if firstPassThrough || !singleFile {
+        let newChecksum = fileGenerator.getChecksum()
+        if newChecksum != nil && fileGenerator.shouldPerformChecksum() {
+          if fileGenerator.fileWriter.getFileChecksum() == newChecksum {
+            print("Contents have not changed")
+            if !singleFile {
+              // Move onto the next file
+              print("Finished \(className()) - \((nextFile as NSString).lastPathComponent) - in \(Date().timeIntervalSince(fileStartDate!)) seconds")
+              continue
+            } else {
+              // Finish the for loop since there were no changes to process.
+              singleFileChecksumSame = true
+              break
+            }
+          }
+        }
+        fileGenerator.fileWriter.checksum = newChecksum
       }
 
-      // Start generating the necessary files.
-      var fileGenerator = newHelper()
-      var fileStartDate: Date?
-      for nextFile in filePaths {
-        if !singleFile {
-          fileStartDate = Date()
-          fileGenerator = newHelper()
-        }
-        // Setup the Generatior Information
-        fileGenerator.parseFilePath = nextFile
-        fileGenerator.searchPath = searchPath
-        fileGenerator.classPrefix = classPrefix
-        fileGenerator.infoPlist = infoPlist
-        fileGenerator.allFilePaths = filePaths
-        fileGenerator.minimumSupportVersion = minimumSupportVersion
-        fileGenerator.singleFile = singleFile
-        fileGenerator.verify = verify
-        fileGenerator.helper = helper
-        fileGenerator.swift = swift
-        // Setup The Writer information
-        fileGenerator.fileWriter.scriptName = scriptName
-        fileGenerator.fileWriter.outputBasePath = outputhPath
-        fileGenerator.fileWriter.fileTypes = fileTypes
-        fileGenerator.fileWriter.fileName = (nextFile as NSString).lastPathComponent
-        fileGenerator.fileWriter.singleFile = singleFile
-        fileGenerator.fileWriter.swift = swift
-        fileGenerator.startGeneratingInfo()
+      // Generate the info returns true if this is a valid file
+      if fileGenerator.startGeneratingInfo() {
+        // Write the file
         if !singleFile {
           // Each File needs their own so write the output.
           if fileGenerator.fileWriter.writeOutputFile() {
@@ -204,14 +236,31 @@ class ListGeneratorHelper: NSObject {
         }
       }
 
-      if singleFile {
-        fileGenerator.finishedGeneratingInfo()
-        // We are all finished with all the files so now we can write the output.
-        _ = fileGenerator.fileWriter.writeOutputFile()
-      }
-
-      print("Finished \(className()) in \(Date().timeIntervalSince(startTime)) seconds")
+      firstPassThrough = false
     }
+
+    if singleFile && !singleFileChecksumSame {
+      fileGenerator.finishedGeneratingInfo()
+      // We are all finished with all the files so now we can write the output.
+      _ = fileGenerator.fileWriter.writeOutputFile()
+    }
+
+    // Remove all files with this helper suffix that we didn't process
+    do {
+      let helperFileSuffix = fileSuffix()
+      let files = try FileManager.default.contentsOfDirectory(atPath: outputhPath)
+      for nextFile in files {
+        if !ouputFiles.contains(nextFile) {
+          if (nextFile as NSString).deletingPathExtension.hasSuffix(helperFileSuffix) {
+            // Remove
+            let removePath = (outputhPath as NSString).appendingPathComponent(nextFile)
+            do { try FileManager.default.removeItem(atPath: removePath) } catch {}
+          }
+        }
+      }
+    } catch {}
+
+    print("Finished \(className()) in \(Date().timeIntervalSince(startTime)) seconds")
 
     return
   }
@@ -285,13 +334,35 @@ class ListGeneratorHelper: NSObject {
     return []
   }
 
+  class func fileSuffix() -> String {
+    NSException(name: NSExceptionName(rawValue: "ListGeneratorHelper"), reason: "Override 'File Suffix' In Subclass", userInfo: nil).raise()
+    return ""
+  }
+
   class func newHelper() -> ListGeneratorHelper {
     NSException(name: NSExceptionName(rawValue: "ListGeneratorHelper"), reason: "Override 'New Helper' In Subclass", userInfo: nil).raise()
     return ListGeneratorHelper()
   }
 
-  func startGeneratingInfo() {
+  func outputFileName() -> String {
+    NSException(name: NSExceptionName(rawValue: "ListGeneratorHelper"), reason: "Override 'Output File Name' In Subclass", userInfo: nil).raise()
+    return ""
+  }
+
+  func shouldPerformChecksum() -> Bool {
+    // Determine if we should perform the checksum based on wether we can or not.
+    return !helper && !verify
+  }
+
+  func getChecksum() -> String? {
+    // Create a checksum so we can see if there were any changes before creating the new file
+    return nil
+  }
+
+  func startGeneratingInfo() -> Bool {
     NSException(name: NSExceptionName(rawValue: "ListGeneratorHelper"), reason: "Override 'Start Generating Info' In Subclass", userInfo: nil).raise()
+    // Return wether the file we are parsing is valid or not.
+    return false
   }
 
   func finishedGeneratingInfo() {

@@ -16,24 +16,37 @@ class StoryboardIdentifiersList: ListGeneratorHelper {
     return ["storyboard", "xib"]
   }
 
+  override class func fileSuffix() -> String {
+    return "Identifiers"
+  }
+
   override class func newHelper() -> ListGeneratorHelper {
     return StoryboardIdentifiersList()
   }
 
-  override func startGeneratingInfo() {
+  override func outputFileName() -> String {
     // Get the File Name
     let fileExtension = ListGeneratorHelper.capitalizedString((parseFilePath as NSString).pathExtension)
     let fileName = ((parseFilePath as NSString).lastPathComponent as NSString).deletingPathExtension
     let formattedFilename = fileName.replacingOccurrences(of: " ", with: "")
     let containsExtensionText = formattedFilename.lowercased().contains(fileExtension.lowercased())
+    if singleFile {
+      return classPrefix + StoryboardIdentifiersList.fileSuffix()
+    } else if containsExtensionText {
+      return classPrefix + formattedFilename + StoryboardIdentifiersList.fileSuffix()
+    } else {
+      return classPrefix + formattedFilename + fileExtension + StoryboardIdentifiersList.fileSuffix()
+    }
+  }
+
+  override func startGeneratingInfo() -> Bool {
+    // Get the File Name
+    let fileExtension = ListGeneratorHelper.capitalizedString((parseFilePath as NSString).pathExtension)
+    let fileName = ((parseFilePath as NSString).lastPathComponent as NSString).deletingPathExtension
+    let formattedFilename = fileName.replacingOccurrences(of: " ", with: "")
     var methodName = "Name"
     if singleFile {
-      fileWriter.outputFileName = classPrefix + "Identifiers"
       methodName = formattedFilename + fileExtension + "Name"
-    } else if containsExtensionText {
-      fileWriter.outputFileName = classPrefix + formattedFilename + "Identifiers"
-    } else {
-      fileWriter.outputFileName = classPrefix + formattedFilename + fileExtension + "Identifiers"
     }
     methodName = ListGeneratorHelper.methodName(methodName)
 
@@ -53,6 +66,8 @@ class StoryboardIdentifiersList: ListGeneratorHelper {
         writeItemToFile(nextIdentifier.stringValue!)
       }
     } catch {}
+
+    return true
   }
 
   private func writeItemToFile(_ value: String, methodName: String? = nil) {
