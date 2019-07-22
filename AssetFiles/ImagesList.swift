@@ -115,6 +115,11 @@ class ImagesList: ListGeneratorHelper {
     for nextExtension in ["swift", "m", "storyboard", "xib", "html", "css"] {
       includeExtensionsString.append(" --include=*.\(nextExtension)")
     }
+    var excludeFilesString = ""
+    for nextExtension in ["swift", "m"] {
+      excludeFilesString.append(" --exclude=\(ImagesList.fileSuffix()).\(nextExtension)")
+    }
+
 
     // Patterns
     var commandPatterns = ""
@@ -125,7 +130,7 @@ class ImagesList: ListGeneratorHelper {
     commandPatterns.append(" -e \"UIImage imageNamed:@\\\"*\"")
 
     // Command to get results
-    let command = "grep -i -r\(includeExtensionsString)\(commandPatterns) \"\(rootPath!)\""
+    let command = "grep -i -r\(excludeFilesString)\(includeExtensionsString)\(commandPatterns) \"\(rootPath!)\""
     if let result = ListGeneratorHelper.runStringAsCommand(command) {
       usedImageString = result
     }
@@ -172,8 +177,10 @@ class ImagesList: ListGeneratorHelper {
 
     // Get the root path to the project so we can search
     var rootPath = searchPath
-    if let newRootPath = ListGeneratorHelper.runStringAsCommand("echo \"$SRCROOT\"") {
-      rootPath = newRootPath
+    if rootPath == nil {
+      if let newRootPath = ListGeneratorHelper.runStringAsCommand("echo \"$SRCROOT\"") {
+        rootPath = newRootPath
+      }
     }
     if rootPath == nil {
       return
@@ -209,7 +216,8 @@ class ImagesList: ListGeneratorHelper {
           let imageName = (fullString as NSString).substring(with: NSMakeRange(7, (fullString.count - 8)))
 
           // Generate Method for file if we don't have the image in our list
-          if !allImages.contains(imageName) {
+          // Ignore "YES" since it is part of accessibility
+          if !allImages.contains(imageName) && imageName != "YES" {
             let methodName = ListGeneratorHelper.methodName(imageName)
             var implementation = ""
             if swift {
