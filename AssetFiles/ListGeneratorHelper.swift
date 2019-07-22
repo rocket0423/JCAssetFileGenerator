@@ -21,6 +21,7 @@ class ListGeneratorHelper: NSObject {
   var verify: Bool = true
   var helper: Bool = true
   var swift: Bool = true
+  var swiftObjC: Bool = false
   var fileWriter: FileWriter = FileWriter()
 
   class func startWithArguments(_ args: [String]) {
@@ -36,6 +37,7 @@ class ListGeneratorHelper: NSObject {
     var verify: Bool = true
     var helper: Bool = true
     var swift: Bool = true
+    var swiftObjC: Bool = false
     var writeFile: Bool = true
     var writeColors: Bool = false
     var writeFonts: Bool = false
@@ -68,7 +70,7 @@ class ListGeneratorHelper: NSObject {
       if nextArg == "-h" {
         // Make sure this help is only printed once.
         if className() == ColorList.className() {
-          print("Usage: \(scriptName) [-s <path>] [-o <path>] [-i <path>] [-v <version>] [-p <prefix>] [-m] [-dnverify] [-dnhelp] [-objc] [-colors] [-fonts] [-images] [-identifiers] [-strings]")
+          print("Usage: \(scriptName) [-s <path>] [-o <path>] [-i <path>] [-v <version>] [-p <prefix>] [-m] [-dnverify] [-dnhelp] [-objc] [-sobjc] [-colors] [-fonts] [-images] [-identifiers] [-strings]")
           print("     \(scriptName) -h")
           print("Options:\n")
           print("  -s <path>  Search for folders starting from <path> (Default is Project Source Directory)")
@@ -80,6 +82,7 @@ class ListGeneratorHelper: NSObject {
           print("  -dnverify  Do not verify any of the code (Default is to always verify)")
           print("  -dnhelp    Do not execute any of the helper code (Default is to always execute the helper code)")
           print("  -objc    Write the file in Objective C (Default is to write in swift)")
+          print("  -sobjc   Write the file in Objective C Members (Default is to write in swift)")
           print("  -colors    Write the colors file (Default is to do all files selecting this disables all others not in arguments)")
           print("  -fonts     Write the fonts file (Default is to do all files selecting this disables all others not in arguments)")
           print("  -images    Write the images file (Default is to do all files selecting this disables all others not in arguments)")
@@ -108,6 +111,8 @@ class ListGeneratorHelper: NSObject {
         helper = false
       } else if nextArg == "-objc" {
         swift = false
+      } else if nextArg == "-sobjc" {
+        swiftObjC = true
       } else if nextArg == "-colors" {
         writeFile = false
         writeColors = true
@@ -195,6 +200,7 @@ class ListGeneratorHelper: NSObject {
       fileGenerator.verify = verify
       fileGenerator.helper = helper
       fileGenerator.swift = swift
+      fileGenerator.swiftObjC = swiftObjC
       // Setup The Writer information
       fileGenerator.fileWriter.scriptName = scriptName
       fileGenerator.fileWriter.outputBasePath = outputhPath
@@ -202,6 +208,7 @@ class ListGeneratorHelper: NSObject {
       fileGenerator.fileWriter.fileName = (nextFile as NSString).lastPathComponent
       fileGenerator.fileWriter.singleFile = singleFile
       fileGenerator.fileWriter.swift = swift
+      fileGenerator.fileWriter.swiftObjC = swiftObjC
       fileGenerator.fileWriter.outputFileName = fileGenerator.outputFileName().replacingOccurrences(of: " ", with: "")
       ouputFiles.append(contentsOf: fileGenerator.fileWriter.getOutputFilePaths())
 

@@ -21,6 +21,7 @@ class FileWriter: NSObject {
   var checksum: String?
   var singleFile: Bool = true
   var swift: Bool = true
+  var swiftObjC: Bool = true
 
   // MARK: - Writing
 
@@ -57,6 +58,9 @@ class FileWriter: NSObject {
     outputFileContent.append("// Please do not edit.\n")
     outputFileContent.append("//\n\n")
     outputFileContent.append("import UIKit\n\n")
+    if swiftObjC {
+      outputFileContent.append("@objcMembers\n")
+    }
     outputFileContent.append("class " + outputFileName + ": NSObject {\n\n")
 
     // If there is a warning message add it
