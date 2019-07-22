@@ -167,89 +167,92 @@ class ListGeneratorHelper: NSObject {
       }
     }
 
-    // Create header string of file types
-    var fileTypes = "."
-    if fileExtensions().count > 1 {
-      var firstTypes = fileExtensions()
-      let lastExtension = firstTypes.removeLast()
-      fileTypes.append(firstTypes.joined(separator: ", ."))
-      fileTypes.append(" and .\(lastExtension)")
-    } else {
-      fileTypes.append(fileExtensions().first!)
-    }
-
-    // Start generating the necessary files.
-    var fileGenerator = newHelper()
-    var fileStartDate: Date?
-    var firstPassThrough = true
-    var singleFileChecksumSame = false
     var ouputFiles: [String] = []
-    for nextFile in filePaths {
-      if !singleFile {
-        fileStartDate = Date()
-        fileGenerator = newHelper()
+    // Make sure we have file paths otherwise it will crash the script
+    if filePaths.count > 0 {
+      // Create header string of file types
+      var fileTypes = "."
+      if fileExtensions().count > 1 {
+        var firstTypes = fileExtensions()
+        let lastExtension = firstTypes.removeLast()
+        fileTypes.append(firstTypes.joined(separator: ", ."))
+        fileTypes.append(" and .\(lastExtension)")
+      } else {
+        fileTypes.append(fileExtensions().first!)
       }
-      // Setup the Generatior Information
-      fileGenerator.parseFilePath = nextFile
-      fileGenerator.searchPath = searchPath
-      fileGenerator.classPrefix = classPrefix
-      fileGenerator.infoPlist = infoPlist
-      fileGenerator.allFilePaths = filePaths
-      fileGenerator.minimumSupportVersion = minimumSupportVersion
-      fileGenerator.singleFile = singleFile
-      fileGenerator.verify = verify
-      fileGenerator.helper = helper
-      fileGenerator.swift = swift
-      fileGenerator.swiftObjC = swiftObjC
-      // Setup The Writer information
-      fileGenerator.fileWriter.scriptName = scriptName
-      fileGenerator.fileWriter.outputBasePath = outputhPath
-      fileGenerator.fileWriter.fileTypes = fileTypes
-      fileGenerator.fileWriter.fileName = (nextFile as NSString).lastPathComponent
-      fileGenerator.fileWriter.singleFile = singleFile
-      fileGenerator.fileWriter.swift = swift
-      fileGenerator.fileWriter.swiftObjC = swiftObjC
-      fileGenerator.fileWriter.outputFileName = fileGenerator.outputFileName().replacingOccurrences(of: " ", with: "")
-      ouputFiles.append(contentsOf: fileGenerator.fileWriter.getOutputFilePaths())
 
-      // Compare the checksum to see if there were any changes and if we can skip generating and writing the file.
-      if firstPassThrough || !singleFile {
-        let newChecksum = fileGenerator.getChecksum()
-        if newChecksum != nil && fileGenerator.shouldPerformChecksum() {
-          if fileGenerator.fileWriter.getFileChecksum() == newChecksum {
-            print("Contents have not changed")
-            if !singleFile {
-              // Move onto the next file
+      // Start generating the necessary files.
+      var fileGenerator = newHelper()
+      var fileStartDate: Date?
+      var firstPassThrough = true
+      var singleFileChecksumSame = false
+      for nextFile in filePaths {
+        if !singleFile {
+          fileStartDate = Date()
+          fileGenerator = newHelper()
+        }
+        // Setup the Generatior Information
+        fileGenerator.parseFilePath = nextFile
+        fileGenerator.searchPath = searchPath
+        fileGenerator.classPrefix = classPrefix
+        fileGenerator.infoPlist = infoPlist
+        fileGenerator.allFilePaths = filePaths
+        fileGenerator.minimumSupportVersion = minimumSupportVersion
+        fileGenerator.singleFile = singleFile
+        fileGenerator.verify = verify
+        fileGenerator.helper = helper
+        fileGenerator.swift = swift
+        fileGenerator.swiftObjC = swiftObjC
+        // Setup The Writer information
+        fileGenerator.fileWriter.scriptName = scriptName
+        fileGenerator.fileWriter.outputBasePath = outputhPath
+        fileGenerator.fileWriter.fileTypes = fileTypes
+        fileGenerator.fileWriter.fileName = (nextFile as NSString).lastPathComponent
+        fileGenerator.fileWriter.singleFile = singleFile
+        fileGenerator.fileWriter.swift = swift
+        fileGenerator.fileWriter.swiftObjC = swiftObjC
+        fileGenerator.fileWriter.outputFileName = fileGenerator.outputFileName().replacingOccurrences(of: " ", with: "")
+        ouputFiles.append(contentsOf: fileGenerator.fileWriter.getOutputFilePaths())
+
+        // Compare the checksum to see if there were any changes and if we can skip generating and writing the file.
+        if firstPassThrough || !singleFile {
+          let newChecksum = fileGenerator.getChecksum()
+          if newChecksum != nil && fileGenerator.shouldPerformChecksum() {
+            if fileGenerator.fileWriter.getFileChecksum() == newChecksum {
+              print("Contents have not changed")
+              if !singleFile {
+                // Move onto the next file
+                print("Finished \(className()) - \((nextFile as NSString).lastPathComponent) - in \(Date().timeIntervalSince(fileStartDate!)) seconds")
+                continue
+              } else {
+                // Finish the for loop since there were no changes to process.
+                singleFileChecksumSame = true
+                break
+              }
+            }
+          }
+          fileGenerator.fileWriter.checksum = newChecksum
+        }
+
+        // Generate the info returns true if this is a valid file
+        if fileGenerator.startGeneratingInfo() {
+          // Write the file
+          if !singleFile {
+            // Each File needs their own so write the output.
+            if fileGenerator.fileWriter.writeOutputFile() {
               print("Finished \(className()) - \((nextFile as NSString).lastPathComponent) - in \(Date().timeIntervalSince(fileStartDate!)) seconds")
-              continue
-            } else {
-              // Finish the for loop since there were no changes to process.
-              singleFileChecksumSame = true
-              break
             }
           }
         }
-        fileGenerator.fileWriter.checksum = newChecksum
+
+        firstPassThrough = false
       }
 
-      // Generate the info returns true if this is a valid file
-      if fileGenerator.startGeneratingInfo() {
-        // Write the file
-        if !singleFile {
-          // Each File needs their own so write the output.
-          if fileGenerator.fileWriter.writeOutputFile() {
-            print("Finished \(className()) - \((nextFile as NSString).lastPathComponent) - in \(Date().timeIntervalSince(fileStartDate!)) seconds")
-          }
-        }
+      if singleFile && !singleFileChecksumSame {
+        fileGenerator.finishedGeneratingInfo()
+        // We are all finished with all the files so now we can write the output.
+        _ = fileGenerator.fileWriter.writeOutputFile()
       }
-
-      firstPassThrough = false
-    }
-
-    if singleFile && !singleFileChecksumSame {
-      fileGenerator.finishedGeneratingInfo()
-      // We are all finished with all the files so now we can write the output.
-      _ = fileGenerator.fileWriter.writeOutputFile()
     }
 
     // Remove all files with this helper suffix that we didn't process
