@@ -45,7 +45,7 @@ class StringsLocalizedList: ListGeneratorHelper {
     if !singleFile {
       let lprojPath = (parseFilePath as NSString).deletingLastPathComponent
       if lprojPath.hasSuffix(".lproj") {
-        if !(lprojPath.hasSuffix("Base.lproj") || lprojPath.hasSuffix("en.lproj")) {
+        if !lprojPath.hasSuffix("en.lproj") {
           // This is a translation file and not the main one so skip.
           return nil
         }
@@ -60,7 +60,7 @@ class StringsLocalizedList: ListGeneratorHelper {
     for nextFile in allFilePaths {
       let lprojPath = (nextFile as NSString).deletingLastPathComponent
       if lprojPath.hasSuffix(".lproj") {
-        if !(lprojPath.hasSuffix("Base.lproj") || lprojPath.hasSuffix("en.lproj")) {
+        if !lprojPath.hasSuffix("en.lproj") {
           // This is a translation file and not the main one so skip.
           continue
         }
@@ -82,7 +82,7 @@ class StringsLocalizedList: ListGeneratorHelper {
     var hasTranslations = false
     let lprojPath = (parseFilePath as NSString).deletingLastPathComponent
     if lprojPath.hasSuffix(".lproj") {
-      if !(lprojPath.hasSuffix("Base.lproj") || lprojPath.hasSuffix("en.lproj")) {
+      if !lprojPath.hasSuffix("en.lproj") {
         // This is a translation file and not the main one so skip.
         return false
       }
