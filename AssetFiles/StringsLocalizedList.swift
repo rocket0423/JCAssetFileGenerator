@@ -14,6 +14,7 @@ class StringsLocalizedList: ListGeneratorHelper {
   var devMessages: [String : String] = [:]
   var keys: [String] = []
   let noMessageText = "/* No comment provided by engineer. */"
+  var usedStringString = ""
 
   override class func fileExtensions() -> [String] {
     return ["strings"]
@@ -51,6 +52,15 @@ class StringsLocalizedList: ListGeneratorHelper {
         }
       }
 
+      if parseFilePath.hasPrefix(fileWriter.outputBasePath) {
+        // This is our own file we created
+        return nil
+      }
+      if parseFilePath.hasSuffix("InfoPlist.strings") {
+        // InfoPlist is only for the info plist not us
+        return nil
+      }
+
       // Hashed key for only this file
       return stringContentsOfFile(parseFilePath)?.hashed(.md5)
     }
@@ -66,6 +76,15 @@ class StringsLocalizedList: ListGeneratorHelper {
         }
       }
 
+      if nextFile.hasPrefix(fileWriter.outputBasePath) {
+        // This is our own file we created
+        continue
+      }
+      if nextFile.hasSuffix("InfoPlist.strings") {
+        // InfoPlist is only for the info plist not us
+        continue
+      }
+
       if let nextFileContents = stringContentsOfFile(nextFile) {
         combinedFilesString.append(nextFileContents)
       }
@@ -77,7 +96,16 @@ class StringsLocalizedList: ListGeneratorHelper {
   override func startGeneratingInfo() -> Bool {
     // Get the file name
     let fileName = ((parseFilePath as NSString).lastPathComponent as NSString).deletingPathExtension
-    
+
+    if parseFilePath.hasPrefix(fileWriter.outputBasePath) {
+      // This is our own file we created
+      return false
+    }
+    if parseFilePath.hasSuffix("InfoPlist.strings") {
+      // InfoPlist is only for the info plist not us
+      return false
+    }
+
     // Determine if this is the main file or a translation file
     var hasTranslations = false
     let lprojPath = (parseFilePath as NSString).deletingLastPathComponent
@@ -89,6 +117,9 @@ class StringsLocalizedList: ListGeneratorHelper {
       // Update all translation files
       hasTranslations = synchronizeFiles()
     }
+
+    // Generate the helper string to find used strings.
+    findUsedStrings()
 
     // If we are verify and we need to add translations add warning messge for swift classes
     if verify && needTranslationKeys.count > 0 && swift {
@@ -133,6 +164,9 @@ class StringsLocalizedList: ListGeneratorHelper {
             if verify && needTranslationKeys.contains(nextKeyString) {
               implementation.append("    NeedsTranslation()\n")
             }
+            if !isUsedString(nextKeyString, method: methodName) {
+              implementation.append("    StringNotUsed()\n")
+            }
             if devComment != nil {
               implementation.append("    return NSLocalizedString(\"\(nextKeyString)\", tableName: \"\(fileName)\", bundle: Bundle.main, value: \"\(localizedString)\", comment: \"\(devComment!)\")\n")
             } else {
@@ -158,6 +192,9 @@ class StringsLocalizedList: ListGeneratorHelper {
             if verify && needTranslationKeys.contains(nextKeyString) {
               implementation.append("  #warning Needs Translation\n")
             }
+            if !isUsedString(nextKeyString, method: methodName) {
+              implementation.append("  #warning String Not Used\n")
+            }
             if devComment != nil {
               implementation.append("  return NSLocalizedStringWithDefaultValue(@\"\(nextKeyString)\", @\"\(fileName)\", [NSBundle mainBundle], @\"\(localizedString)\", @\"\(devComment!)\");\n")
             } else {
@@ -180,6 +217,72 @@ class StringsLocalizedList: ListGeneratorHelper {
     return true
   }
 
+  private func findUsedStrings() {
+    if !verify || !usedStringString.isEmpty {
+      // We are not verifying used images or we have already done the searching.
+      return
+    }
+
+    // Get the root path to the project so we can search
+    var rootPath = searchPath
+    if rootPath == nil {
+      if let newRootPath = ListGeneratorHelper.runStringAsCommand("echo \"$SRCROOT\"") {
+        rootPath = newRootPath
+      }
+    }
+    if rootPath == nil {
+      return
+    }
+
+    // Extensions
+    var includeExtensionsString = ""
+    for nextExtension in ["swift", "m", "storyboard", "xib", "html", "css"] {
+      includeExtensionsString.append(" --include=*.\(nextExtension)")
+    }
+    var excludeFilesString = ""
+    for nextExtension in ["swift", "m"] {
+      excludeFilesString.append(" --exclude=\(StringsLocalizedList.fileSuffix()).\(nextExtension)")
+    }
+
+
+    // Patterns
+    var commandPatterns = ""
+    commandPatterns.append(" -e \"\(StringsLocalizedList.fileSuffix())\\.*\"")
+    commandPatterns.append(" -e \"\(StringsLocalizedList.fileSuffix()) *\"")
+
+    // Command to get results
+    let command = "grep -i -r\(excludeFilesString)\(includeExtensionsString)\(commandPatterns) \"\(rootPath!)\""
+    if let result = ListGeneratorHelper.runStringAsCommand(command) {
+      usedStringString = result
+    }
+  }
+
+  private func isUsedString(_ stringKey: String, method: String) -> Bool {
+    if !verify {
+      // We are not verifying so just return true
+      return true
+    } else if usedStringString.contains("\(StringsLocalizedList.fileSuffix()).\(method)") {
+      return true
+    }
+
+    if swift {
+      // Add Warning Message to output file only needed for swift
+      var notUsedMessage = ""
+      notUsedMessage.append("  /// Warning message so console is notified.\n")
+      notUsedMessage.append("  @available(iOS, deprecated: 1.0, message: \"String Not Used\")\n")
+      notUsedMessage.append("  private class func StringNotUsed(){}\n\n")
+
+      if fileWriter.warningMessage == nil {
+        fileWriter.warningMessage = notUsedMessage
+      } else if !fileWriter.warningMessage!.contains("StringNotUsed") {
+        fileWriter.warningMessage!.append(notUsedMessage)
+      }
+    }
+
+    // Not found return false and add the image not used function to file
+    return false
+  }
+
   private func synchronizeFiles() -> Bool {
     var hasTranslations = false
 
@@ -193,6 +296,14 @@ class StringsLocalizedList: ListGeneratorHelper {
       let nextFileFolder = ((nextFile as NSString).deletingLastPathComponent as NSString).deletingLastPathComponent
       if currentFileFolder != nextFileFolder {
         // Not the same strings file
+        continue
+      }
+      if nextFile.hasPrefix(fileWriter.outputBasePath) {
+        // This is our own file we created
+        continue
+      }
+      if nextFile.hasSuffix("InfoPlist.strings") {
+        // We don't process InfoPlist
         continue
       }
 
@@ -249,18 +360,28 @@ class StringsLocalizedList: ListGeneratorHelper {
 
         // Get Translation info
         if !nextMainComponent.hasPrefix("\"") {
-          translationFile?.append(nextMainComponent)
+          if lastComment != nil {
+            if translationFile == "\n" {
+              // This is the first line
+              translationFile = ""
+            }
+            translationFile?.append(lastComment!)
+          }
+
           // Store the comment so we can determine later if we need to write it for the missing translation file
           lastComment = nextMainComponent
         } else {
           let key = keyForComponent(nextMainComponent)
           if helper || verify {
             if let translation = stringForKey(keyForComponent(nextMainComponent), components: nextFileComponents!) {
+              if lastComment != nil {
+                translationFile = "\(translationFile!.dropLast())"
+                translationFile?.append(lastComment!)
+                translationFile?.append("\n")
+              }
               translationFile?.append(translation)
             } else {
-              // Write that we are missing a translation in the language file.
-              translationFile?.append("// Missing Translation - \(nextMainComponent)")
-
+              // Write that we are missing a translation to a sepearate file.
               // For missing translation see if we have a comment
               if lastComment != nil {
                 missingTranslationFile?.append(lastComment!)

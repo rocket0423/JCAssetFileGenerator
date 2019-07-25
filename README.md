@@ -100,12 +100,16 @@ If a string is removed from the 'strings' file it is removed from the souce and 
 
 ##### Verify #####
 
-This executable does 1 type of verification for NeedsTranslation Check.
+This executable does 2 type of verifications for NeedsTranslation Check and TranslationUsed.
 
 For the NeedsTranslation check it checks through all the translation files to see if the translation is missing or is labeled with the the text '// Needs Translation'. Any string that meets these criteria will display a compiler warning letting you know translations need to be added for it.
 
+For the TranslationUsed check it checks through all the .m and .swift files to see if the string is used in the "Strings." format. Any string that meets these criteria will display a compiler warning letting you know the string isn't being used and can be removed.
+
 ##### Helpers #####
-A helper this executable does is for localized strings in other languages it updates all the other languages to the base language. If the string is removed it is removed from all other language files as well. If a string is added it adds it to all the other langage files in the base translation with a comment that says it Needs Translation.
+A helper this executable does is for localized strings in other languages it updates all the other languages to the base language.
+If the string is removed it is removed from all other language files as well.
+If a string is added and there is no translation it creates a new file in the output directory for the file and language for all missing translations and what their english counterparts are.
 
 
 ## ColorList ##
