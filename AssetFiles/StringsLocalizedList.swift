@@ -374,7 +374,7 @@ class StringsLocalizedList: ListGeneratorHelper {
           let key = keyForComponent(nextMainComponent)
           if helper || verify {
             if let translation = stringForKey(keyForComponent(nextMainComponent), components: nextFileComponents!) {
-              if lastComment != nil {
+              if lastComment != nil && helper {
                 translationFile = "\(translationFile!.dropLast())"
                 translationFile?.append(lastComment!)
                 translationFile?.append("\n")
