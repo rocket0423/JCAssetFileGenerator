@@ -23,24 +23,13 @@
 		B934B3A120FA61C40060BB43 /* ImagesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934B38320FA5B440060BB43 /* ImagesList.swift */; };
 		B934B3A220FA61C40060BB43 /* CustomFontList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934B38220FA5B440060BB43 /* CustomFontList.swift */; };
 		B934B3A320FA61C40060BB43 /* ColorList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934B38420FA5B440060BB43 /* ColorList.swift */; };
-		B934B3DF20FAA76A0060BB43 /* NonLoclizedStrings.strings in Resources */ = {isa = PBXBuildFile; fileRef = B934B3E120FAA76A0060BB43 /* NonLoclizedStrings.strings */; };
-		B99BE41B22E4D23B003EE154 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99BE41A22E4D23B003EE154 /* Colors.swift */; };
-		B99BE41E22E4D248003EE154 /* Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = B99BE41D22E4D248003EE154 /* Colors.m */; };
-		B99BE42122E4D251003EE154 /* BPColorsStringsColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99BE41F22E4D251003EE154 /* BPColorsStringsColors.swift */; };
-		B99BE42222E4D251003EE154 /* BPColorsAssetsColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99BE42022E4D251003EE154 /* BPColorsAssetsColors.swift */; };
-		B99BE42422E4D265003EE154 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99BE42322E4D265003EE154 /* Fonts.swift */; };
-		B99BE42722E4D26C003EE154 /* Fonts.m in Sources */ = {isa = PBXBuildFile; fileRef = B99BE42522E4D26C003EE154 /* Fonts.m */; };
-		B99BE42922E4D276003EE154 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99BE42822E4D276003EE154 /* Identifiers.swift */; };
-		B99BE42F22E4D283003EE154 /* BPMainStoryboardIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99BE42D22E4D283003EE154 /* BPMainStoryboardIdentifiers.swift */; };
-		B99BE43022E4D283003EE154 /* BPLaunchScreenStoryboardIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99BE42E22E4D283003EE154 /* BPLaunchScreenStoryboardIdentifiers.swift */; };
-		B99BE43322E4D28C003EE154 /* Identifiers.m in Sources */ = {isa = PBXBuildFile; fileRef = B99BE43222E4D28C003EE154 /* Identifiers.m */; };
-		B99BE43522E4D293003EE154 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99BE43422E4D293003EE154 /* Images.swift */; };
-		B99BE43822E4D298003EE154 /* Images.m in Sources */ = {isa = PBXBuildFile; fileRef = B99BE43622E4D298003EE154 /* Images.m */; };
-		B99BE43A22E4D29C003EE154 /* BPImagesImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99BE43922E4D29C003EE154 /* BPImagesImages.swift */; };
-		B99BE43C22E4D2A2003EE154 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99BE43B22E4D2A2003EE154 /* Strings.swift */; };
-		B99BE43F22E4D2A8003EE154 /* Strings.m in Sources */ = {isa = PBXBuildFile; fileRef = B99BE43E22E4D2A8003EE154 /* Strings.m */; };
-		B99BE44122E4D2AD003EE154 /* BPNonLoclizedStringsStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99BE44022E4D2AD003EE154 /* BPNonLoclizedStringsStrings.swift */; };
 		B9D9D5E822E3D7450070EB5F /* Crypto+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D9D5E722E3D7450070EB5F /* Crypto+Extensions.swift */; };
+		BD3A74C623F47093005D9A59 /* NonLoclizedStrings.strings in Resources */ = {isa = PBXBuildFile; fileRef = BD3A74C323F47093005D9A59 /* NonLoclizedStrings.strings */; };
+		BD51C1BE2428728A00BD1296 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD51C1B92428728900BD1296 /* Identifiers.swift */; };
+		BD51C1BF2428728A00BD1296 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD51C1BA2428728900BD1296 /* Strings.swift */; };
+		BD51C1C02428728A00BD1296 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD51C1BB2428728A00BD1296 /* Colors.swift */; };
+		BD51C1C12428728A00BD1296 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD51C1BC2428728A00BD1296 /* Images.swift */; };
+		BD51C1C22428728A00BD1296 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD51C1BD2428728A00BD1296 /* Fonts.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -75,30 +64,14 @@
 		B934B38720FA5B440060BB43 /* ListGeneratorHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListGeneratorHelper.swift; sourceTree = "<group>"; };
 		B934B39520FA618E0060BB43 /* AssetFiles */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AssetFiles; sourceTree = BUILT_PRODUCTS_DIR; };
 		B934B39720FA618E0060BB43 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		B934B3E220FAA76B0060BB43 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/NonLoclizedStrings.strings; sourceTree = "<group>"; };
-		B934B3E320FAA7A80060BB43 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/NonLoclizedStrings.strings; sourceTree = "<group>"; };
-		B99BE41A22E4D23B003EE154 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Colors.swift; path = 1/Colors.swift; sourceTree = "<group>"; };
-		B99BE41C22E4D248003EE154 /* Colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Colors.h; path = 2/Colors.h; sourceTree = "<group>"; };
-		B99BE41D22E4D248003EE154 /* Colors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Colors.m; path = 2/Colors.m; sourceTree = "<group>"; };
-		B99BE41F22E4D251003EE154 /* BPColorsStringsColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BPColorsStringsColors.swift; path = 3/BPColorsStringsColors.swift; sourceTree = "<group>"; };
-		B99BE42022E4D251003EE154 /* BPColorsAssetsColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BPColorsAssetsColors.swift; path = 3/BPColorsAssetsColors.swift; sourceTree = "<group>"; };
-		B99BE42322E4D265003EE154 /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Fonts.swift; path = 1/Fonts.swift; sourceTree = "<group>"; };
-		B99BE42522E4D26C003EE154 /* Fonts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Fonts.m; path = 2/Fonts.m; sourceTree = "<group>"; };
-		B99BE42622E4D26C003EE154 /* Fonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Fonts.h; path = 2/Fonts.h; sourceTree = "<group>"; };
-		B99BE42822E4D276003EE154 /* Identifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Identifiers.swift; path = 1/Identifiers.swift; sourceTree = "<group>"; };
-		B99BE42D22E4D283003EE154 /* BPMainStoryboardIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BPMainStoryboardIdentifiers.swift; path = 3/BPMainStoryboardIdentifiers.swift; sourceTree = "<group>"; };
-		B99BE42E22E4D283003EE154 /* BPLaunchScreenStoryboardIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BPLaunchScreenStoryboardIdentifiers.swift; path = 3/BPLaunchScreenStoryboardIdentifiers.swift; sourceTree = "<group>"; };
-		B99BE43122E4D28C003EE154 /* Identifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Identifiers.h; path = 2/Identifiers.h; sourceTree = "<group>"; };
-		B99BE43222E4D28C003EE154 /* Identifiers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Identifiers.m; path = 2/Identifiers.m; sourceTree = "<group>"; };
-		B99BE43422E4D293003EE154 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Images.swift; path = 1/Images.swift; sourceTree = "<group>"; };
-		B99BE43622E4D298003EE154 /* Images.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Images.m; path = 2/Images.m; sourceTree = "<group>"; };
-		B99BE43722E4D298003EE154 /* Images.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Images.h; path = 2/Images.h; sourceTree = "<group>"; };
-		B99BE43922E4D29C003EE154 /* BPImagesImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BPImagesImages.swift; path = 3/BPImagesImages.swift; sourceTree = "<group>"; };
-		B99BE43B22E4D2A2003EE154 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Strings.swift; path = 1/Strings.swift; sourceTree = "<group>"; };
-		B99BE43D22E4D2A8003EE154 /* Strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Strings.h; path = 2/Strings.h; sourceTree = "<group>"; };
-		B99BE43E22E4D2A8003EE154 /* Strings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Strings.m; path = 2/Strings.m; sourceTree = "<group>"; };
-		B99BE44022E4D2AD003EE154 /* BPNonLoclizedStringsStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BPNonLoclizedStringsStrings.swift; path = 3/BPNonLoclizedStringsStrings.swift; sourceTree = "<group>"; };
 		B9D9D5E722E3D7450070EB5F /* Crypto+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Crypto+Extensions.swift"; sourceTree = "<group>"; };
+		BD3A74C423F47093005D9A59 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/NonLoclizedStrings.strings; sourceTree = "<group>"; };
+		BD3A74C523F47093005D9A59 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/NonLoclizedStrings.strings; sourceTree = "<group>"; };
+		BD51C1B92428728900BD1296 /* Identifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
+		BD51C1BA2428728900BD1296 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		BD51C1BB2428728A00BD1296 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		BD51C1BC2428728A00BD1296 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
+		BD51C1BD2428728A00BD1296 /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,8 +119,8 @@
 				B934B30C20FA59460060BB43 /* ColorsAssets.xcassets */,
 				B934B30B20FA59460060BB43 /* ColorsStrings.colors */,
 				B934B30F20FA594C0060BB43 /* Images.xcassets */,
-				B934B3E120FAA76A0060BB43 /* NonLoclizedStrings.strings */,
 				B934B31120FA59590060BB43 /* tracfk.ttf */,
+				BD3A74C323F47093005D9A59 /* NonLoclizedStrings.strings */,
 				B934B2F620FA584C0060BB43 /* Main.storyboard */,
 				B934B2FB20FA584D0060BB43 /* LaunchScreen.storyboard */,
 				B934B2FE20FA584D0060BB43 /* Info.plist */,
@@ -158,11 +131,11 @@
 		B934B30A20FA593C0060BB43 /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-				B934B3BA20FA64A70060BB43 /* Colors */,
-				B934B3B120FA64A70060BB43 /* Fonts */,
-				B934B3AB20FA64A70060BB43 /* Identifiers */,
-				B934B3B520FA64A70060BB43 /* Images */,
-				B934B3A420FA64A70060BB43 /* Strings */,
+				BD51C1BB2428728A00BD1296 /* Colors.swift */,
+				BD51C1BD2428728A00BD1296 /* Fonts.swift */,
+				BD51C1B92428728900BD1296 /* Identifiers.swift */,
+				BD51C1BC2428728A00BD1296 /* Images.swift */,
+				BD51C1BA2428728900BD1296 /* Strings.swift */,
 			);
 			path = Generated;
 			sourceTree = "<group>";
@@ -181,62 +154,6 @@
 				B934B39720FA618E0060BB43 /* main.swift */,
 			);
 			path = AssetFiles;
-			sourceTree = "<group>";
-		};
-		B934B3A420FA64A70060BB43 /* Strings */ = {
-			isa = PBXGroup;
-			children = (
-				B99BE43B22E4D2A2003EE154 /* Strings.swift */,
-				B99BE43D22E4D2A8003EE154 /* Strings.h */,
-				B99BE43E22E4D2A8003EE154 /* Strings.m */,
-				B99BE44022E4D2AD003EE154 /* BPNonLoclizedStringsStrings.swift */,
-			);
-			path = Strings;
-			sourceTree = "<group>";
-		};
-		B934B3AB20FA64A70060BB43 /* Identifiers */ = {
-			isa = PBXGroup;
-			children = (
-				B99BE42822E4D276003EE154 /* Identifiers.swift */,
-				B99BE43122E4D28C003EE154 /* Identifiers.h */,
-				B99BE43222E4D28C003EE154 /* Identifiers.m */,
-				B99BE42E22E4D283003EE154 /* BPLaunchScreenStoryboardIdentifiers.swift */,
-				B99BE42D22E4D283003EE154 /* BPMainStoryboardIdentifiers.swift */,
-			);
-			path = Identifiers;
-			sourceTree = "<group>";
-		};
-		B934B3B120FA64A70060BB43 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				B99BE42322E4D265003EE154 /* Fonts.swift */,
-				B99BE42622E4D26C003EE154 /* Fonts.h */,
-				B99BE42522E4D26C003EE154 /* Fonts.m */,
-			);
-			path = Fonts;
-			sourceTree = "<group>";
-		};
-		B934B3B520FA64A70060BB43 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				B99BE43422E4D293003EE154 /* Images.swift */,
-				B99BE43722E4D298003EE154 /* Images.h */,
-				B99BE43622E4D298003EE154 /* Images.m */,
-				B99BE43922E4D29C003EE154 /* BPImagesImages.swift */,
-			);
-			path = Images;
-			sourceTree = "<group>";
-		};
-		B934B3BA20FA64A70060BB43 /* Colors */ = {
-			isa = PBXGroup;
-			children = (
-				B99BE41A22E4D23B003EE154 /* Colors.swift */,
-				B99BE41C22E4D248003EE154 /* Colors.h */,
-				B99BE41D22E4D248003EE154 /* Colors.m */,
-				B99BE42022E4D251003EE154 /* BPColorsAssetsColors.swift */,
-				B99BE41F22E4D251003EE154 /* BPColorsStringsColors.swift */,
-			);
-			path = Colors;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -323,10 +240,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B934B2FD20FA584D0060BB43 /* LaunchScreen.storyboard in Resources */,
-				B934B3DF20FAA76A0060BB43 /* NonLoclizedStrings.strings in Resources */,
 				B934B31320FA59590060BB43 /* tracfk.ttf in Resources */,
 				B934B31020FA594C0060BB43 /* Images.xcassets in Resources */,
 				B934B30E20FA59460060BB43 /* ColorsAssets.xcassets in Resources */,
+				BD3A74C623F47093005D9A59 /* NonLoclizedStrings.strings in Resources */,
 				B934B30D20FA59460060BB43 /* ColorsStrings.colors in Resources */,
 				B934B2F820FA584C0060BB43 /* Main.storyboard in Resources */,
 			);
@@ -368,23 +285,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B99BE42422E4D265003EE154 /* Fonts.swift in Sources */,
-				B99BE42122E4D251003EE154 /* BPColorsStringsColors.swift in Sources */,
-				B99BE43C22E4D2A2003EE154 /* Strings.swift in Sources */,
-				B99BE44122E4D2AD003EE154 /* BPNonLoclizedStringsStrings.swift in Sources */,
+				BD51C1C22428728A00BD1296 /* Fonts.swift in Sources */,
 				B934B2F520FA584C0060BB43 /* ViewController.swift in Sources */,
-				B99BE42222E4D251003EE154 /* BPColorsAssetsColors.swift in Sources */,
-				B99BE43522E4D293003EE154 /* Images.swift in Sources */,
-				B99BE43A22E4D29C003EE154 /* BPImagesImages.swift in Sources */,
-				B99BE42F22E4D283003EE154 /* BPMainStoryboardIdentifiers.swift in Sources */,
-				B99BE42922E4D276003EE154 /* Identifiers.swift in Sources */,
-				B99BE42722E4D26C003EE154 /* Fonts.m in Sources */,
-				B99BE43022E4D283003EE154 /* BPLaunchScreenStoryboardIdentifiers.swift in Sources */,
-				B99BE43F22E4D2A8003EE154 /* Strings.m in Sources */,
-				B99BE41E22E4D248003EE154 /* Colors.m in Sources */,
-				B99BE41B22E4D23B003EE154 /* Colors.swift in Sources */,
-				B99BE43822E4D298003EE154 /* Images.m in Sources */,
-				B99BE43322E4D28C003EE154 /* Identifiers.m in Sources */,
+				BD51C1C12428728A00BD1296 /* Images.swift in Sources */,
+				BD51C1C02428728A00BD1296 /* Colors.swift in Sources */,
+				BD51C1BE2428728A00BD1296 /* Identifiers.swift in Sources */,
+				BD51C1BF2428728A00BD1296 /* Strings.swift in Sources */,
 				B934B2F320FA584C0060BB43 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -424,11 +330,11 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
-		B934B3E120FAA76A0060BB43 /* NonLoclizedStrings.strings */ = {
+		BD3A74C323F47093005D9A59 /* NonLoclizedStrings.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B934B3E220FAA76B0060BB43 /* fr */,
-				B934B3E320FAA7A80060BB43 /* Base */,
+				BD3A74C423F47093005D9A59 /* en */,
+				BD3A74C523F47093005D9A59 /* fr */,
 			);
 			name = NonLoclizedStrings.strings;
 			sourceTree = "<group>";

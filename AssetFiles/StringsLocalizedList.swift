@@ -270,7 +270,7 @@ class StringsLocalizedList: ListGeneratorHelper {
       var notUsedMessage = ""
       notUsedMessage.append("  /// Warning message so console is notified.\n")
       notUsedMessage.append("  @available(iOS, deprecated: 1.0, message: \"String Not Used\")\n")
-      notUsedMessage.append("  private class func StringNotUsed(){}\n\n")
+      notUsedMessage.append("  private static func StringNotUsed(){}\n\n")
 
       if fileWriter.warningMessage == nil {
         fileWriter.warningMessage = notUsedMessage

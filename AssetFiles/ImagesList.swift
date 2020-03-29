@@ -158,7 +158,7 @@ class ImagesList: ListGeneratorHelper {
       var notUsedMessage = ""
       notUsedMessage.append("  /// Warning message so console is notified.\n")
       notUsedMessage.append("  @available(iOS, deprecated: 1.0, message: \"Image Not Used\")\n")
-      notUsedMessage.append("  private class func ImageNotUsed(){}\n\n")
+      notUsedMessage.append("  private static func ImageNotUsed(){}\n\n")
 
       if fileWriter.warningMessage == nil {
         fileWriter.warningMessage = notUsedMessage

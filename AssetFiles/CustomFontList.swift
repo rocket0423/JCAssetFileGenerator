@@ -13,7 +13,7 @@ class CustomFontList: ListGeneratorHelper {
   var keys: [String] = []
 
   override class func fileExtensions() -> [String] {
-    return ["ttf"]
+    return ["ttf", "otf"]
   }
 
   override class func fileSuffix() -> String {
@@ -44,7 +44,7 @@ class CustomFontList: ListGeneratorHelper {
         if swift {
           var implementation = ""
           implementation.append("  /// \(fontName) Font\n")
-          implementation.append("  class func \(methodName)FontOfSize(_ fontSize : CGFloat) -> UIFont? {\n")
+          implementation.append("  static func \(methodName)FontOfSize(_ fontSize : CGFloat) -> UIFont? {\n")
           implementation.append("    return UIFont(name: \"\(fontName)\", size: fontSize)\n")
           implementation.append("  }\n\n")
           fileWriter.outputMethods.append(implementation)
